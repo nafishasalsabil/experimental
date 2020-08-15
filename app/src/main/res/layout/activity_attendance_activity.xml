@@ -145,11 +145,13 @@
         android:layout_below="@id/layout1">
 
 
+        <!--            tools:listitem="@layout/student_item"-->
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/students_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="20dp" />
+            android:layout_height="match_parent" />
 
         <TextView
             android:id="@+id/tv1"
@@ -176,12 +178,71 @@
             android:textStyle="normal" />
 
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/add_student"
+        <Button
+            android:id="@+id/b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
+            android:text="logout"
+            />
+
+        <Button
+            android:id="@+id/done_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="Done"
+            android:fontFamily="@font/exoregular"
+            android:background="#3A5463"
+            android:textColor="@android:color/white"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/main_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            app:layout_anchorGravity="center_vertical|right"
+            app:fab_addButtonColorNormal="#3c1414"
+            app:fab_addButtonColorPressed="#3c1414"
+
+            app:fab_addButtonPlusIconColor="#ffffff"
+            app:fab_expandDirection="up"
+            app:fab_labelStyle="@style/menu_labels_style"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp">
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_student_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_icon="@drawable/ic_group_add_black_24dp"
+                app:fab_colorNormal="#3c1414"
+                app:fab_title="Add student"
+                app:fab_size="mini"
+                app:fab_colorPressed="#3c1414"
+                />
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/take_attendance_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_icon="@drawable/ic_person_outline_black_24dp"
+                app:fab_colorNormal="#3c1414"
+                app:fab_title="Take attendance"
+                app:fab_size="mini"
+                app:fab_colorPressed="#3c1414"
+                />
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_student_new_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="50dp"
+            android:padding="10dp"
             android:backgroundTint="#3c1414"
             android:src="@drawable/ic_group_add_black_24dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

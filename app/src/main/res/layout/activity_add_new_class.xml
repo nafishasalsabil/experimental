@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="128dp"
         android:fontFamily="@font/moonbold"
-        android:text="Add a new student"
+        android:text="Add a new course"
         android:textSize="30sp" />
 
     <TextView
@@ -27,6 +27,7 @@
         android:text="Course Title    : "
         android:textColor="@android:color/white"
         android:textStyle = "bold"
+        android:fontFamily="@font/exoregular"
         />
 
     <EditText
@@ -46,6 +47,7 @@
         android:layout_marginTop="250dp"
         android:padding="10dp"
         android:text="Course No.      : "
+        android:fontFamily="@font/exoregular"
         android:textColor="@android:color/white" />
 
     <EditText
@@ -64,6 +66,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="300dp"
         android:padding="10dp"
+        android:fontFamily="@font/exoregular"
         android:text="Semester         : "
         android:textColor="@android:color/white" />
 
@@ -84,6 +87,7 @@
         android:layout_marginTop="350dp"
         android:padding="10dp"
         android:text="Credits             : "
+        android:fontFamily="@font/exoregular"
         android:textColor="@android:color/white" />
 
     <EditText
@@ -103,6 +107,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="390dp"
         android:padding="10dp"
+        android:fontFamily="@font/exoregular"
         android:text="What kind of course is this?"
         android:textColor="@android:color/white" />
 
@@ -120,6 +125,7 @@
             android:layout_height="wrap_content"
             android:text="Theory"
             android:onClick="radiobutton"
+            android:fontFamily="@font/exoregular"
             android:textColor="@android:color/white"
             android:buttonTint="@android:color/darker_gray"
             />
@@ -129,6 +135,7 @@
             android:layout_height="wrap_content"
             android:text="Lab"
             android:onClick="radiobutton"
+            android:fontFamily="@font/exoregular"
             android:textColor="@android:color/white"
             android:buttonTint="@android:color/darker_gray"
 
@@ -143,6 +150,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="470dp"
         android:padding="10dp"
+        android:fontFamily="@font/exoregular"
         android:text="How many quizes?"
         android:textColor="@android:color/white" />
 
@@ -165,7 +173,8 @@
         android:layout_marginBottom="58dp"
         android:background="@drawable/roundedbutton"
         android:gravity="center"
-        android:text="Submit" />
+        android:text="Submit"
+        />
 
 
 </RelativeLayout>

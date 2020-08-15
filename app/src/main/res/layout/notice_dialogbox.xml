@@ -5,8 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/transparent"
     android:layout_gravity="center"
-    tools:context=".Attendance_activity"
-
     >
 
     <LinearLayout
@@ -19,64 +17,49 @@
         android:gravity = 'center_horizontal'
         android:padding="26dp">
 
-        <EditText
-            android:id="@+id/student_id"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/roundededittext"
-            android:cursorVisible="true"
-            android:gravity="center"
+       <TextView
+           android:padding="10dp"
 
-            android:hint="Student ID" />
-
-        <EditText
-            android:id="@+id/student_name"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_below="@id/edit_courseno"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/roundededittext"
-            android:cursorVisible="true"
-            android:gravity="center"
-
-            android:hint="Student name" />
-
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="You cannot add students once you start taking attendance. Do you want to add students before you start?"
+           android:textColor="@android:color/black"
+           android:fontFamily="@font/exoregular"
+           android:layout_gravity="center"
+           android:gravity="center"
+           />
 
 
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/edit_courseno"
             android:layout_marginStart="-90dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/roundedbutton"
             android:gravity="center"
             android:padding="10dp"
-            android:id= "@+id/add"
-            android:text="Add" />
+            android:id= "@+id/yes_button"
+            android:text="yes" />
 
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/edit_courseno"
             android:layout_marginStart="90dp"
             android:layout_marginTop="-48dp"
             android:background="@drawable/roundedbutton"
-            android:id= "@+id/cancelbutton"
-
+            android:id= "@+id/no_button"
             android:gravity="center"
             android:padding="10dp"
-            android:text="cancel" />
+            android:text="no" />
     </LinearLayout>
 
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="35dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_student_logo"
+        android:src="@drawable/ic_alert_red"
         android:layout_marginStart="-230dp"
         />
 

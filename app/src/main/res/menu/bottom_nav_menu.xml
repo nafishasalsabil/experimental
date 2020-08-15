@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Home"
+        />
+
+    <item
         android:id="@+id/nav_classes"
         android:icon="@drawable/ic_class_black_24dp"
         android:title="Classes" />
@@ -10,11 +16,6 @@
         android:title="Schedule"
         />
 
-    <item
-        android:id="@+id/nav_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="Home"
-        />
 
     <item
         android:id="@+id/nav_message"

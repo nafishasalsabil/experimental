@@ -122,18 +122,18 @@ SharedPreferences sharedPreferences;
                             {
                                 sharedPreferences = getSharedPreferences("selected", Context.MODE_PRIVATE);
                                 boolean bool= sharedPreferences.getBoolean("lockedState", true);
-                                if(bool == true)
+                              /*  if(bool == true)
                                 {
                                     System.out.println("helloooooooooooooooooooooooo");
                                     startActivity(new Intent(getApplicationContext(), Features.class));
 
                                 }
                                 else
-                                {
+                                {*/
                                     startActivity(new Intent(getApplicationContext(), ChoiceActivity.class));
                                     Toast.makeText(Main2Activity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
 
-                                }
+                      //          }
 
 
                             }

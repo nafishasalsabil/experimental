@@ -3,10 +3,13 @@ package com.example.chalkboardnew;
 public class StudentItems {
     private String id;
     private String name;
+    private String status;
 
-    public StudentItems(String id, String name) {
+
+    public StudentItems(String id, String name,String status) {
         this.id = id;
         this.name = name;
+        this.status = status;
     }
 
     public String getId() {
@@ -25,5 +28,12 @@ public class StudentItems {
         this.name = name;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
 }

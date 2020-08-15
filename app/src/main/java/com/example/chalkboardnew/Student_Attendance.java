@@ -77,7 +77,7 @@ public class Student_Attendance extends AppCompatActivity {
     private void addclass() {
         String ids = id.getText().toString();
         String names = name.getText().toString();
-        studentItems.add(new StudentItems(ids,names));
+     //   studentItems.add(new StudentItems(ids,names));
       //  studentAdapter.notifyDataSetChanged();
     }
 

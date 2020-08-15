@@ -3,6 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#dadada">
-
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="bhallagena"
+    android:layout_centerInParent="true"
+    android:textSize="30sp"
+    android:layout_gravity="center"/>
 
 </RelativeLayout>

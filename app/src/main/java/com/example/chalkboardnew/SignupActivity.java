@@ -142,7 +142,15 @@ public class SignupActivity extends AppCompatActivity {
                                             user.put("username",usern);
                                             user.put("email",mail);
                                             user.put("password",pass);
-                                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                         /*   ChatUser chatUser = new ChatUser();
+                                            chatUser.setName(usern);
+                                            chatUser.setImageUrl("default");
+                                            chatUser.setId(userID);
+                                         */
+                                            System.out.println(userID);
+                                         ForSignupDatabase forSignupDatabase = new ForSignupDatabase();
+                                         forSignupDatabase.setUid(userID);
+                                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
                                                     startActivity(new Intent(getApplicationContext(), Main2Activity.class));

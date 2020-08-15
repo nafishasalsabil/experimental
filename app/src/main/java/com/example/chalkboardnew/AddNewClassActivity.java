@@ -103,14 +103,7 @@ public class AddNewClassActivity extends AppCompatActivity implements AdapterVie
                 creditHour = credits.getText().toString().trim();
                 courseType = rb;
                 noOfQuizes = text;
-                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                //now get Editor
-                SharedPreferences.Editor editor = sharedPref.edit();
-                //put your value
-                editor.putString("courseTitle", courseTitle);
 
-                //commits your edits
-                editor.commit();
 
                 documentReference = firestore.collection("users").document(userID).collection("Courses").document(courseTitle);
 

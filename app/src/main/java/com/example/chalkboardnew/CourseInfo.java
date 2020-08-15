@@ -65,6 +65,9 @@ public class CourseInfo {
         this.noOfQuizes = noOfQuizes;
     }
 
-
+    @Override
+    public String toString() {
+        return  this.getCourseTitle();
+    }
 
 }

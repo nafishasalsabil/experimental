@@ -30,7 +30,17 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
 
     Context context;
     List<CourseInfo> classitems;
+
+    public int getPos() {
+        return pos;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
+
     String p = "", q = "";
+    int pos;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -42,6 +52,7 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
     public interface OnItemClickListener {
 
         void onClick(int position);
+
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -51,6 +62,8 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
     public ClassAdapter(Context context, List<CourseInfo> classitems) {
         this.classitems = classitems;
         this.context = context;
+
+
     }
 
 
@@ -82,6 +95,7 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
         holder.classname.setText(classitems.get(position).getCourseTitle());
         holder.course.setText(classitems.get(position).getCourseNo());
 
+       // setPos(holder.getAdapterPosition());
 
         //    holder.editcoursetitle.setText(classitems.get(position).getCourseTitle());
         // holder.editcourseno.setText(classitems.get(position).getCourseNo());
@@ -187,7 +201,6 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
                 dialog.show();
 
             }
-
 
 
         });

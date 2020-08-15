@@ -1,27 +1,21 @@
 package com.example.chalkboardnew;
 
 public class ForSignupDatabase {
-    String username, email, password,choice;
+    String username, email, password,uid;
 
     public ForSignupDatabase() {
 
     }
 
-    public ForSignupDatabase(String username, String email, String password,String choice) {
+    public ForSignupDatabase(String username, String email, String password,String uid) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.choice = choice;
+        this.uid = uid;
+
 
     }
 
-    public String getChoice() {
-        return choice;
-    }
-
-    public void setChoice(String choice) {
-        this.choice = choice;
-    }
 
     public String getUsername() {
         return username;
@@ -45,5 +39,13 @@ public class ForSignupDatabase {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

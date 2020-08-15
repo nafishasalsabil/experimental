@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="64dp"
+    android:layout_height="74dp"
     android:id="@+id/cardview"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginLeft="6dp"
@@ -13,16 +13,15 @@
     app:cardCornerRadius="4dp"
     android:orientation="vertical">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
         android:padding="8dp">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,60 +31,88 @@
                 android:id="@+id/roll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="01"
                 android:layout_marginTop="0dp"
+                android:fontFamily="@font/exoregular"
 
-                android:textStyle="bold"
-                android:textSize="15sp"
+                android:text="01"
                 android:textColor="@android:color/black"
-                android:fontFamily="@font/exoregular"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="name"
                 android:layout_marginTop="0dp"
-                android:textStyle="bold"
+                android:fontFamily="@font/exoregular"
+                android:text="name"
                 android:textColor="@android:color/black"
                 android:textSize="15sp"
-                android:fontFamily="@font/exoregular"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/present_status"
+        <RadioGroup
+            android:id="@+id/radioGroup_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:layout_marginLeft="210dp"
-            android:src="@drawable/p"
-            android:layout_marginTop="-0dp"
-            android:layout_marginBottom="20dp"
-            android:layout_alignParentTop="true"/>
-        <ImageView
-            android:id="@+id/absent_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:layout_marginLeft="270dp"
-            android:src="@drawable/a"
-            android:layout_marginTop="-0dp"
-            android:layout_marginBottom="20dp"
-            android:layout_alignParentTop="true"/>
-        <ImageView
-            android:id="@+id/late_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:layout_marginLeft="330dp"
-            android:src="@drawable/l"
-            android:layout_marginTop="-0dp"
-            android:layout_marginBottom="20dp"
-            android:layout_alignParentTop="true"/>
+            android:layout_alignParentEnd="true"
+            android:orientation="horizontal"
+            android:padding="0dp">
 
+            <RadioButton
+                android:id="@+id/radioButton_present"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/p"
+                android:padding="0dp"/>
+
+            <RadioButton
+                android:id="@+id/radioButton_abs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/a"/>
+
+            <RadioButton
+                android:id="@+id/radioButton_late"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:button="@drawable/l" />
+        </RadioGroup>
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/present_status"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:clickable="true"-->
+        <!--            android:layout_marginLeft="210dp"-->
+        <!--            android:src="@drawable/p"-->
+        <!--            android:layout_marginTop="-0dp"-->
+        <!--            android:layout_marginBottom="20dp"-->
+        <!--            android:layout_alignParentTop="true"/>-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/absent_status"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:clickable="true"-->
+        <!--            android:layout_marginLeft="270dp"-->
+        <!--            android:src="@drawable/a"-->
+        <!--            android:layout_marginTop="-0dp"-->
+        <!--            android:layout_marginBottom="20dp"-->
+        <!--            android:layout_alignParentTop="true"/>-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/late_status"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:clickable="true"-->
+        <!--            android:layout_marginLeft="330dp"-->
+        <!--            android:src="@drawable/l"-->
+        <!--            android:layout_marginTop="-0dp"-->
+        <!--            android:layout_marginBottom="20dp"-->
+        <!--            android:layout_alignParentTop="true"/>-->
 
 
     </RelativeLayout>
 
-</RelativeLayout>
+
 </androidx.cardview.widget.CardView>

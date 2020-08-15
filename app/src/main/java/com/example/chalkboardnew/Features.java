@@ -12,6 +12,7 @@ import androidx.navigation.NavController;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,7 +49,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class Features extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener {
     public DrawerLayout drawerLayout;
     public NavigationView navigationView;
-    Toolbar toolbar1;
+    Toolbar toolbar_features;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     Button signout;
@@ -111,19 +112,27 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         //   signout = findViewById(R.id.signout);
-        toolbar1 = findViewById(R.id.include);
+        toolbar_features = findViewById(R.id.toolbar_features);
         drawerLayout = findViewById(R.id.dlayout);
         navigationView = findViewById(R.id.navigationView);
 //        navController = Navigation.findNavController(this, R.id.main);
         //firebaseDatabase = FirebaseDatabase.getInstance();
         firestore = FirebaseFirestore.getInstance();
         userID =  firebaseAuth.getCurrentUser().getUid();
+        System.out.println(userID);
         DocumentReference documentReference = firestore.collection("users").document(userID);
-
 //
-        setSupportActionBar(toolbar1);
-        getSupportActionBar().setTitle("Features");
-        toolbar1.setTitleTextColor(Color.parseColor("#2D2A2E"));
+         setSupportActionBar(toolbar_features);
+     /*   getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#EFF3FB")));
+        getSupportActionBar().setElevation(0);
+     */   //setSupportActionBar(toolbar1);
+     /*   if(getSupportActionBar()!= null)
+        {
+            getSupportActionBar().setTitle("Chalkboard");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+*/
+    //    toolbar1.setTitleTextColor(Color.parseColor("#2D2A2E"));
         username = navigationView.getHeaderView(0).findViewById(R.id.username);
         profilepic = navigationView.getHeaderView(0).findViewById(R.id.profilepic);
 
@@ -131,6 +140,8 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener1);
         load(ClassesFragment.newInstance());
+        getSupportFragmentManager().beginTransaction().replace(R.id.container_main,new HomeFragment()).commit();
+
         //        setupBottomNavView();
         // bottomNavigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
 
@@ -138,7 +149,7 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
      //   bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
     //    bottomNavigationView.setSelectedItemId(R.id.nav_home);
 
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar1, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar_features, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
 //        toolbar.setNavigationIcon(R.drawable.ic_person_outline_black_24dp);
 
@@ -190,181 +201,181 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
             //   fields.append("\nPhone: ").append(doc.get("phone"));
                username.setText(u);
                if (u.startsWith("a") || u.startsWith("A")) {
-                   toolbar1.setNavigationIcon(R.drawable.a_un);
+                   toolbar_features.setNavigationIcon(R.drawable.a_un);
                    profilepic.setImageResource(R.drawable.a_un);
 
                }
                if (u.startsWith("b") || u.startsWith("B")) {
-                   toolbar1.setNavigationIcon(R.drawable.b_letter);
+                   toolbar_features.setNavigationIcon(R.drawable.b_letter);
                    profilepic.setImageResource(R.drawable.b_letter);
 
                }
                if (u.startsWith("c") || u.startsWith("C")) {
-                   toolbar1.setNavigationIcon(R.drawable.c);
+                   toolbar_features.setNavigationIcon(R.drawable.c);
                    profilepic.setImageResource(R.drawable.c);
 
                }
                if (u.startsWith("d") || u.startsWith("D")) {
-                   toolbar1.setNavigationIcon(R.drawable.d);
+                   toolbar_features.setNavigationIcon(R.drawable.d);
                    profilepic.setImageResource(R.drawable.d);
 
                }
                if (u.startsWith("e") || u.startsWith("E")) {
-                   toolbar1.setNavigationIcon(R.drawable.e);
+                   toolbar_features.setNavigationIcon(R.drawable.e);
                    profilepic.setImageResource(R.drawable.e);
 
                }
                if (u.startsWith("f") || u.startsWith("F")) {
-                   toolbar1.setNavigationIcon(R.drawable.f);
+                   toolbar_features.setNavigationIcon(R.drawable.f);
                    profilepic.setImageResource(R.drawable.f);
 
                }
                if (u.startsWith("g") || u.startsWith("G")) {
-                   toolbar1.setNavigationIcon(R.drawable.g);
+                   toolbar_features.setNavigationIcon(R.drawable.g);
                    profilepic.setImageResource(R.drawable.g);
 
                }
                if (u.startsWith("h") || u.startsWith("H")) {
-                   toolbar1.setNavigationIcon(R.drawable.h);
+                   toolbar_features.setNavigationIcon(R.drawable.h);
                    profilepic.setImageResource(R.drawable.h);
 
                }
                if (u.startsWith("i") || u.startsWith("I")) {
-                   toolbar1.setNavigationIcon(R.drawable.i);
+                   toolbar_features.setNavigationIcon(R.drawable.i);
                    profilepic.setImageResource(R.drawable.i);
 
                }
                if (u.startsWith("j") || u.startsWith("J")) {
-                   toolbar1.setNavigationIcon(R.drawable.j);
+                   toolbar_features.setNavigationIcon(R.drawable.j);
                    profilepic.setImageResource(R.drawable.j);
 
                }
                if (u.startsWith("k") || u.startsWith("K")) {
-                   toolbar1.setNavigationIcon(R.drawable.k);
+                   toolbar_features.setNavigationIcon(R.drawable.k);
                    profilepic.setImageResource(R.drawable.k);
 
                }
                if (u.startsWith("l") || u.startsWith("L")) {
-                   toolbar1.setNavigationIcon(R.drawable.l);
-                   profilepic.setImageResource(R.drawable.l);
+                   toolbar_features.setNavigationIcon(R.drawable.l_un);
+                   profilepic.setImageResource(R.drawable.l_un);
 
                }
                if (u.startsWith("m") || u.startsWith("M")) {
-                   toolbar1.setNavigationIcon(R.drawable.m);
+                   toolbar_features.setNavigationIcon(R.drawable.m);
                    profilepic.setImageResource(R.drawable.m);
 
                }
                if (u.startsWith("n") || u.startsWith("N")) {
-                   toolbar1.setNavigationIcon(R.drawable.ic_n);
+                   toolbar_features.setNavigationIcon(R.drawable.ic_n);
                    profilepic.setImageResource(R.drawable.ic_n);
 
                }
                if (u.startsWith("o") || u.startsWith("O")) {
-                   toolbar1.setNavigationIcon(R.drawable.o);
+                   toolbar_features.setNavigationIcon(R.drawable.o);
                    profilepic.setImageResource(R.drawable.o);
 
                }
                if (u.startsWith("p") || u.startsWith("P")) {
-                   toolbar1.setNavigationIcon(R.drawable.p);
+                   toolbar_features.setNavigationIcon(R.drawable.p);
                    profilepic.setImageResource(R.drawable.p);
 
                }
                if (u.startsWith("q") || u.startsWith("Q")) {
-                   toolbar1.setNavigationIcon(R.drawable.q);
+                   toolbar_features.setNavigationIcon(R.drawable.q);
                    profilepic.setImageResource(R.drawable.q);
 
                }
                if (u.startsWith("r") || u.startsWith("R")) {
-                   toolbar1.setNavigationIcon(R.drawable.r);
+                   toolbar_features.setNavigationIcon(R.drawable.r);
                    profilepic.setImageResource(R.drawable.r);
 
                }
                if (u.startsWith("s") || u.startsWith("S")) {
-                   toolbar1.setNavigationIcon(R.drawable.s);
+                   toolbar_features.setNavigationIcon(R.drawable.s);
                    profilepic.setImageResource(R.drawable.s);
 
                }
                if (u.startsWith("t") || u.startsWith("T")) {
-                   toolbar1.setNavigationIcon(R.drawable.t);
+                   toolbar_features.setNavigationIcon(R.drawable.t);
                    profilepic.setImageResource(R.drawable.t);
 
                }
                if (u.startsWith("u") || u.startsWith("U")) {
-                   toolbar1.setNavigationIcon(R.drawable.u);
+                   toolbar_features.setNavigationIcon(R.drawable.u);
                    profilepic.setImageResource(R.drawable.u);
 
                }
                if (u.startsWith("v") || u.startsWith("V")) {
-                   toolbar1.setNavigationIcon(R.drawable.v);
+                   toolbar_features.setNavigationIcon(R.drawable.v);
                    profilepic.setImageResource(R.drawable.v);
 
                }
                if (u.startsWith("w") || u.startsWith("W")) {
-                   toolbar1.setNavigationIcon(R.drawable.w);
+                   toolbar_features.setNavigationIcon(R.drawable.w);
                    profilepic.setImageResource(R.drawable.w);
 
                }  if (u.startsWith("x") || u.startsWith("X")) {
-                   toolbar1.setNavigationIcon(R.drawable.x);
+                   toolbar_features.setNavigationIcon(R.drawable.x);
                    profilepic.setImageResource(R.drawable.x);
 
                }
                if (u.startsWith("y") || u.startsWith("Y")) {
-                   toolbar1.setNavigationIcon(R.drawable.y);
+                   toolbar_features.setNavigationIcon(R.drawable.y);
                    profilepic.setImageResource(R.drawable.y);
 
                }
                if (u.startsWith("z") || u.startsWith("Z")) {
-                   toolbar1.setNavigationIcon(R.drawable.z);
+                   toolbar_features.setNavigationIcon(R.drawable.z);
                    profilepic.setImageResource(R.drawable.z);
 
                }
                if (u.startsWith("0") ) {
-                   toolbar1.setNavigationIcon(R.drawable.no0);
+                   toolbar_features.setNavigationIcon(R.drawable.no0);
                    profilepic.setImageResource(R.drawable.no0);
 
                }
                if (u.startsWith("1") ) {
-                   toolbar1.setNavigationIcon(R.drawable.no1);
+                   toolbar_features.setNavigationIcon(R.drawable.no1);
                    profilepic.setImageResource(R.drawable.no1);
 
                }
                if (u.startsWith("2") ) {
-                   toolbar1.setNavigationIcon(R.drawable.no2);
+                   toolbar_features.setNavigationIcon(R.drawable.no2);
                    profilepic.setImageResource(R.drawable.no2);
 
                }
                if (u.startsWith("3") ) {
-                   toolbar1.setNavigationIcon(R.drawable.no3);
+                   toolbar_features.setNavigationIcon(R.drawable.no3);
                    profilepic.setImageResource(R.drawable.no3);
 
                }
                if (u.startsWith("4") ) {
-                   toolbar1.setNavigationIcon(R.drawable.no4);
+                   toolbar_features.setNavigationIcon(R.drawable.no4);
                    profilepic.setImageResource(R.drawable.no4);
 
                }
                if (u.startsWith("5") ) {
-                   toolbar1.setNavigationIcon(R.drawable.no5);
+                   toolbar_features.setNavigationIcon(R.drawable.no5);
                    profilepic.setImageResource(R.drawable.no5);
 
                }
                if (u.startsWith("6") ) {
-                   toolbar1.setNavigationIcon(R.drawable.no6);
+                   toolbar_features.setNavigationIcon(R.drawable.no6);
                    profilepic.setImageResource(R.drawable.no6);
 
                }
                if (u.startsWith("8") ) {
-                   toolbar1.setNavigationIcon(R.drawable.no8);
+                   toolbar_features.setNavigationIcon(R.drawable.no8);
                    profilepic.setImageResource(R.drawable.no8);
 
                }
                if (u.startsWith("7") ) {
-                   toolbar1.setNavigationIcon(R.drawable.no7);
+                   toolbar_features.setNavigationIcon(R.drawable.no7);
                    profilepic.setImageResource(R.drawable.no7);
 
                }
                if (u.startsWith("9") ) {
-                   toolbar1.setNavigationIcon(R.drawable.no9);
+                   toolbar_features.setNavigationIcon(R.drawable.no9);
                    profilepic.setImageResource(R.drawable.no9);
 
                }
@@ -377,8 +388,6 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
                public void onFailure(@NonNull Exception e) {
                }
            });
-
-
         actionBarDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -387,9 +396,9 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
             }
         });
 
-        actionBarDrawerToggle.setHomeAsUpIndicator(R.drawable.ic_person_outline_black_24dp);
+       actionBarDrawerToggle.setHomeAsUpIndicator(R.drawable.ic_person_outline_black_24dp);
 
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+      /*  gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
 
@@ -399,7 +408,7 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
                 .build();
          // bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         //  getSupportFragmentManager().beginTransaction().replace(R.id.main,new HomeFragment()).commit();
-
+*/
     }
 
 
@@ -470,11 +479,11 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
 
             }
 
-            if (selectedMenuItem != mActiveBottomNavigationViewMenuItem){
+          /*  if (selectedMenuItem != mActiveBottomNavigationViewMenuItem){
                 mActiveBottomNavigationViewMenuItem.setChecked(false);
                 mActiveBottomNavigationViewMenuItem = selectedMenuItem;
             }
-
+*/
             return false;
         }
     };
@@ -533,7 +542,7 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 startActivity(intent);
-                Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+               /* Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
                         new ResultCallback<Status>() {
                             @Override
                             public void onResult(Status status) {
@@ -544,7 +553,7 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
                                 }
                             }
                         });
-
+*/
 
                 break;
         }

@@ -23,6 +23,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,7 +42,7 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
     CardView attendance,materials,results,student_info;
     public DrawerLayout drawerLayout;
     public NavigationView navigationView;
-    Toolbar toolbar1;
+    Toolbar toolbar_inside_class;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -69,7 +71,7 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         //   signout = findViewById(R.id.signout);
-        toolbar1 = findViewById(R.id.inside_class_toolbar);
+        toolbar_inside_class = findViewById(R.id.inside_class_toolbar);
         drawerLayout = findViewById(R.id.inside_class_dlayout);
         navigationView = findViewById(R.id.navigationView);
 //        navController = Navigation.findNavController(this, R.id.main);
@@ -77,13 +79,16 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
         firestore = FirebaseFirestore.getInstance();
         userID =  firebaseAuth.getCurrentUser().getUid();
         DocumentReference documentReference = firestore.collection("users").document(userID);
-
 //
-        setSupportActionBar(toolbar1);
+
+        setSupportActionBar(toolbar_inside_class);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#EFF3FB")));
+        getSupportActionBar().setElevation(0);
+//
         username = navigationView.getHeaderView(0).findViewById(R.id.username);
         profilepic = navigationView.getHeaderView(0).findViewById(R.id.profilepic);
 
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar1, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar_inside_class, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
 //        toolbar.setNavigationIcon(R.drawable.ic_person_outline_black_24dp);
 
@@ -100,7 +105,7 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
                     //  fields.append("\nEmail: ").append(doc.get("email"));
                     //   fields.append("\nPhone: ").append(doc.get("phone"));
                     username.setText(u);
-                    if (u.startsWith("a") || u.startsWith("A")) {
+                  /*  if (u.startsWith("a") || u.startsWith("A")) {
                         toolbar1.setNavigationIcon(R.drawable.a_un);
                         profilepic.setImageResource(R.drawable.a_un);
 
@@ -276,11 +281,11 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
 
                     }
                     if (u.startsWith("9") ) {
-                        toolbar1.setNavigationIcon(R.drawable.no9);
+                        getSupportActionBar().setNavigationIcon(R.drawable.no9);
                         profilepic.setImageResource(R.drawable.no9);
 
                     }
-
+*/
                 }
             }
         })
@@ -309,6 +314,13 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
                 startActivity(new Intent(getApplicationContext(),Attendance_activity.class));
             }
         });
+        materials.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Materials.class));
+
+            }
+        });
     }
 
     @Override
@@ -322,7 +334,8 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 startActivity(intent);
-                Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+
+           /*     Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
                         new ResultCallback<Status>() {
                             @Override
                             public void onResult(Status status) {
@@ -333,6 +346,7 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
                                 }
                             }
                         });
+*/
 
 
                 break;
