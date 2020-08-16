@@ -85,7 +85,7 @@ public class ClassesFragment extends Fragment implements NavigationView.OnNaviga
     //    String name = getArguments().getString("data");
     EditText ct, cn;
     String title = "";
-    Toolbar classes_toolbar;
+   // Toolbar classes_toolbar;
 
 
     private DocumentReference documentReference;
@@ -135,7 +135,12 @@ public class ClassesFragment extends Fragment implements NavigationView.OnNaviga
                 t1.setVisibility(View.GONE);
                 t2.setVisibility(View.GONE);
                 //    System.out.println();
-                classAdapter.setOnItemClickListener(position -> gotoinsideclass(position));
+                classAdapter.setOnItemClickListener(new ClassAdapter.OnItemClickListener() {
+                    @Override
+                    public void onClick(int position) {
+                        gotoinsideclass(position);
+                    }
+                });
 
 
             }
@@ -148,19 +153,19 @@ public class ClassesFragment extends Fragment implements NavigationView.OnNaviga
                 startActivity(new Intent(getActivity(), AddNewClassActivity.class));
             }
         });
-        drawerLayout = view.findViewById(R.id.classes_dlayout);
+     /*   drawerLayout = view.findViewById(R.id.classes_dlayout);
         navigationView = view.findViewById(R.id.navigationView);
-        DocumentReference id_documentReference = firestore.collection("users").document(userID);
-        username = navigationView.getHeaderView(0).findViewById(R.id.username);
+     */   DocumentReference id_documentReference = firestore.collection("users").document(userID);
+       /* username = navigationView.getHeaderView(0).findViewById(R.id.username);
         profilepic = navigationView.getHeaderView(0).findViewById(R.id.profilepic);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, classes_toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
+       *//* actionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, classes_toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        actionBarDrawerToggle.setDrawerIndicatorEnabled(false);*/
 //        toolbar.setNavigationIcon(R.drawable.ic_person_outline_black_24dp);
 
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+   /*     drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) getActivity());
-       /* id_documentReference.get().addOnCompleteListener(new OnCompleteListener< DocumentSnapshot >() {
+       *//* id_documentReference.get().addOnCompleteListener(new OnCompleteListener< DocumentSnapshot >() {
             @Override
             public void onComplete(@NonNull Task < DocumentSnapshot > task) {
                 if (task.isSuccessful()) {
@@ -358,7 +363,7 @@ public class ClassesFragment extends Fragment implements NavigationView.OnNaviga
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
-*/
+*//*
         actionBarDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -366,11 +371,16 @@ public class ClassesFragment extends Fragment implements NavigationView.OnNaviga
 
             }
         });
-
+*/
 
 
 
         return view;
+    }
+
+    public void test()
+    {
+
     }
 
     private void gotoinsideclass(int position) {

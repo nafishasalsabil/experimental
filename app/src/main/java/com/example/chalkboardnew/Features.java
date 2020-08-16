@@ -123,9 +123,9 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
         DocumentReference documentReference = firestore.collection("users").document(userID);
 //
          setSupportActionBar(toolbar_features);
-     /*   getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#EFF3FB")));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#EFF3FB")));
         getSupportActionBar().setElevation(0);
-     */   //setSupportActionBar(toolbar1);
+        //setSupportActionBar(toolbar1);
      /*   if(getSupportActionBar()!= null)
         {
             getSupportActionBar().setTitle("Chalkboard");
@@ -397,7 +397,6 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
         });
 
        actionBarDrawerToggle.setHomeAsUpIndicator(R.drawable.ic_person_outline_black_24dp);
-
       /*  gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();

@@ -16,7 +16,14 @@ public class Home extends Application {
 
         if(firebaseUser != null)
         {
-            Intent intent = new Intent(Home.this,Features.class);
+            Intent intent = new Intent(getApplicationContext(),Features.class);
+
+            startActivity(intent);
+
+        }
+        else
+        {
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
 
             startActivity(intent);
 

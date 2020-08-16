@@ -79,7 +79,12 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
             course = itemView.findViewById(R.id.courseno);
             cardView = itemView.findViewById(R.id.classcard);
             edit = itemView.findViewById(R.id.editclass);
-            itemView.setOnClickListener(v -> onItemClickListener.onClick(getAdapterPosition()));
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onClick(ClassViewHolder.this.getAdapterPosition());
+                }
+            });
         }
     }
 
