@@ -306,12 +306,16 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
 
         actionBarDrawerToggle.setHomeAsUpIndicator(R.drawable.ic_person_outline_black_24dp);
 
-
+        Intent intent = getIntent();
+        String title = intent.getStringExtra("Title");
+       // System.out.println(title);
 
         attendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Attendance_activity.class));
+                Intent intent = new Intent(getApplicationContext(),Attendance_activity.class);
+                intent.putExtra("title",title);
+                startActivity(intent);
             }
         });
         materials.setOnClickListener(new View.OnClickListener() {
@@ -321,6 +325,8 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
 
             }
         });
+
+
     }
 
     @Override

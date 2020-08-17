@@ -22,6 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static com.example.chalkboardnew.Attendance_activity.detect1;
+import static com.example.chalkboardnew.Attendance_activity.detect2;
+import static java.security.AccessController.getContext;
+
 class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHolder> {
 
     Context context;
@@ -101,7 +105,9 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHold
         holder.roll.setText(studentItems.get(position).getId());
         holder.name.setText(studentItems.get(position).getName());
         studentItems.get(position).setStatus(status);
-        String ui = ((Attendance_activity)context).detect1;
+       // Attendance_activity attendance_activity = new Attendance_activity();
+
+        String ui = Attendance_activity.detect1;
         System.out.println(ui);
        if( ui.equals("make_invisible")) {
 
@@ -112,7 +118,7 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHold
            holder.radioButtonLate.setVisibility(View.GONE);
 
        }
-        String uv = ((Attendance_activity)context).detect2;
+        String uv = Attendance_activity.detect2;
         System.out.println(uv);
 
          if(  uv.equals("make_visible")) {
@@ -141,7 +147,7 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHold
                    holder.radioButtonLate.setButtonDrawable(R.drawable.l);
                   */ if(Objects.equals(studentItems.get(position).getStatus(),""))
                    {
-                       ((Attendance_activity)context).statusSingleP(true);
+                       Attendance_activity.statusSingleP(true);
                        holder.radioButtonPresent.setButtonDrawable(R.drawable.p_filled);
                        holder.radioButtonAbs.setButtonDrawable(R.drawable.a);
                        holder.radioButtonLate.setButtonDrawable(R.drawable.l);
@@ -151,7 +157,7 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHold
                    else if(Objects.equals(studentItems.get(position).getStatus(),ABS_TEXT))
                    {
 
-                       ((Attendance_activity)context).statusP(true,false);
+                       Attendance_activity.statusP(true,false);
                        holder.radioButtonPresent.setButtonDrawable(R.drawable.p_filled);
                        holder.radioButtonAbs.setButtonDrawable(R.drawable.a);
                        holder.radioButtonLate.setButtonDrawable(R.drawable.l);
@@ -160,7 +166,7 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHold
                    }
                    else if(Objects.equals(studentItems.get(position).getStatus(),LATE_TEXT))
                    {
-                       ((Attendance_activity)context).statusP(false,true);
+                       Attendance_activity.statusP(false,true);
                        holder.radioButtonPresent.setButtonDrawable(R.drawable.p_filled);
                        holder.radioButtonAbs.setButtonDrawable(R.drawable.a);
                        holder.radioButtonLate.setButtonDrawable(R.drawable.l);
@@ -177,7 +183,7 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHold
 */
                    if(Objects.equals(studentItems.get(position).getStatus(),""))
                    {
-                       ((Attendance_activity)context).statusSingleA(true);
+                       Attendance_activity.statusSingleA(true);
                        holder.radioButtonAbs.setButtonDrawable(R.drawable.a_filled);
                        holder.radioButtonPresent.setButtonDrawable(R.drawable.p);
                        holder.radioButtonLate.setButtonDrawable(R.drawable.l);
@@ -187,7 +193,7 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHold
                    }
                    else if(Objects.equals(studentItems.get(position).getStatus(),PRESENT_TEXT))
                    {
-                       ((Attendance_activity)context).statusA(true,false);
+                       Attendance_activity.statusA(true,false);
                        holder.radioButtonAbs.setButtonDrawable(R.drawable.a_filled);
                        holder.radioButtonPresent.setButtonDrawable(R.drawable.p);
                        holder.radioButtonLate.setButtonDrawable(R.drawable.l);
@@ -197,7 +203,7 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHold
                    }
                    else if(Objects.equals(studentItems.get(position).getStatus(),LATE_TEXT))
                    {
-                       ((Attendance_activity)context).statusA(false,true);
+                       Attendance_activity.statusA(false,true);
                        holder.radioButtonAbs.setButtonDrawable(R.drawable.a_filled);
                        holder.radioButtonPresent.setButtonDrawable(R.drawable.p);
                        holder.radioButtonLate.setButtonDrawable(R.drawable.l);
@@ -215,7 +221,7 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHold
 */
                    if(Objects.equals(studentItems.get(position).getStatus(),""))
                    {
-                       ((Attendance_activity)context).statusSingleL(true);
+                       Attendance_activity.statusSingleL(true);
                        holder.radioButtonLate.setButtonDrawable(R.drawable.l_filled);
                        holder.radioButtonPresent.setButtonDrawable(R.drawable.p);
                        holder.radioButtonAbs.setButtonDrawable(R.drawable.a);
@@ -226,7 +232,7 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHold
                    }
                    else if(Objects.equals(studentItems.get(position).getStatus(),PRESENT_TEXT))
                    {
-                       ((Attendance_activity)context).statusL(true,false);
+                       Attendance_activity.statusL(true,false);
                        holder.radioButtonLate.setButtonDrawable(R.drawable.l_filled);
                        holder.radioButtonPresent.setButtonDrawable(R.drawable.p);
                        holder.radioButtonAbs.setButtonDrawable(R.drawable.a);
@@ -236,7 +242,7 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHold
                    }
                    else if(Objects.equals(studentItems.get(position).getStatus(),ABS_TEXT))
                    {
-                       ((Attendance_activity)context).statusL(false,true);
+                       Attendance_activity.statusL(false,true);
                        holder.radioButtonLate.setButtonDrawable(R.drawable.l_filled);
                        holder.radioButtonPresent.setButtonDrawable(R.drawable.p);
                        holder.radioButtonAbs.setButtonDrawable(R.drawable.a);

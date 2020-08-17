@@ -10,6 +10,7 @@ public class Home extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+/*
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
@@ -19,14 +20,10 @@ public class Home extends Application {
             Intent intent = new Intent(getApplicationContext(),Features.class);
 
             startActivity(intent);
+            finish();
 
         }
-        else
-        {
-            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+*/
 
-            startActivity(intent);
-
-        }
     }
 }

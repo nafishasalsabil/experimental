@@ -2,6 +2,7 @@ package com.example.chalkboardnew;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -82,7 +83,11 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onClick(ClassViewHolder.this.getAdapterPosition());
+//                    onItemClickListener.onClick(ClassViewHolder.this.getAdapterPosition());
+                    Intent intent = new Intent(v.getContext(),InsideClassActivity.class);
+                    intent.putExtra("Title",classname.getText());
+                   // System.out.println(classname.getText());
+                    v.getContext().startActivity(intent);
                 }
             });
         }
@@ -99,6 +104,8 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
     public void onBindViewHolder(@NonNull ClassViewHolder holder, int position) {
         holder.classname.setText(classitems.get(position).getCourseTitle());
         holder.course.setText(classitems.get(position).getCourseNo());
+       // System.out.println(position);
+      //  System.out.println(holder.getAdapterPosition());
 
        // setPos(holder.getAdapterPosition());
 

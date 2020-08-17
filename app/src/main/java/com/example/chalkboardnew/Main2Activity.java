@@ -50,11 +50,32 @@ public  class Main2Activity extends AppCompatActivity implements View.OnClickLis
     private GoogleSignInClient mGoogleSignInClient;
     private final static int RC_SIGN_IN = 1;
     ProgressBar progressBar;
-    FirebaseAuth mAuth;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseFirestore firestore;
     private GoogleApiClient googleApiClient;
 SharedPreferences sharedPreferences;
 
+  /*  @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser firebaseUser =mAuth.getCurrentUser();
+        if(mAuth.getCurrentUser()!=null)
+        {
+            Intent intent = new Intent(this,Features.class);
+
+            startActivity(intent);
+
+        }
+        *//*else
+        {
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+            finish();
+
+        }
+*//*
+    }
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +100,7 @@ SharedPreferences sharedPreferences;
         password =(EditText) findViewById(R.id.password);
         signup = (TextView) findViewById(R.id.signup);
         progressBar = findViewById(R.id.progressbar);
-        mAuth = FirebaseAuth.getInstance();
+
   //      firestore = FirebaseFirestore.getInstance();
 
         google = findViewById(R.id.google);
@@ -96,7 +117,6 @@ SharedPreferences sharedPreferences;
                 progressBar.setVisibility(View.VISIBLE);
                  String mail = email.getText().toString().trim();
                 String pass = password.getText().toString().trim();
-
 
 
                 if (TextUtils.isEmpty(mail)) {

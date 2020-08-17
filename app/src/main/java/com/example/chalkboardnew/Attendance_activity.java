@@ -36,6 +36,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -63,22 +64,22 @@ public class Attendance_activity extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-    String userID;
-    //    String name = getArguments().getString("data");
+    String userID = firebaseAuth.getCurrentUser().getUid();
     String title = "";
     Button done;
 
     SharedPreferences sharedPreferences1, sharedPreferences2, sharedPreferences3;
     private DocumentReference documentReference;
     private CollectionReference collectionReference;
-    int p = 0, a = 0, l = 0;
+    static int p = 0, a = 0, l = 0;
     Button b;
-    String detect1 = "";
-    String detect2 = "";
+    public static String detect1 = "";
+    public static String detect2 = "";
     com.getbase.floatingactionbutton.FloatingActionButton add_student_new_fab;
     com.getbase.floatingactionbutton.FloatingActionButton add_student;
     private AlertDialog.Builder alerDialog;
     private AlertDialog.Builder alertdialog_for_attendance;
+    String Lecture ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,14 +100,19 @@ public class Attendance_activity extends AppCompatActivity {
         presentcount = findViewById(R.id.present_student_count);
         absentcount = findViewById(R.id.absent_student_count);
         latecount = findViewById(R.id.late_student_count);
-
-
         recyclerView = (RecyclerView) findViewById(R.id.students_recycler_view);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        studentAdapter = new StudentAdapter(this, studentItems);
+
+        Intent intent = getIntent();
+        String clicked_courseTitle = intent.getStringExtra("title");
+        System.out.println(clicked_courseTitle);
+        studentAdapter = new StudentAdapter(getApplicationContext(), studentItems);
         recyclerView.setAdapter(studentAdapter);
+     //   studentItems.addAll(documentData);
+        studentAdapter.notifyDataSetChanged();
+
         present.setVisibility(View.INVISIBLE);
         absent.setVisibility(View.INVISIBLE);
         late.setVisibility(View.INVISIBLE);
@@ -122,7 +128,6 @@ public class Attendance_activity extends AppCompatActivity {
                 Intent intent = new Intent(Attendance_activity.this, Main2Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
                 startActivity(intent);
 
             }
@@ -296,6 +301,20 @@ public class Attendance_activity extends AppCompatActivity {
 */
         //  sharedPreferences1 = getSharedPreferences("selected",Context.MODE_PRIVATE);
         //    x= sharedPreferences1.getBoolean("lockedState", true);
+        System.out.println(Lecture);
+       /* collectionReference = firestore.collection("users").document(userID).collection("Courses").document(clicked_courseTitle).collection();
+        collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                List<StudentItems> documentData = queryDocumentSnapshots.toObjects(StudentItems.class);
+                studentAdapter = new StudentAdapter(getApplicationContext(), studentItems);
+                recyclerView.setAdapter(studentAdapter);
+                studentItems.addAll(documentData);
+                studentAdapter.notifyDataSetChanged();
+
+            }
+        });
+*/
 
 
     }
@@ -360,9 +379,10 @@ public class Attendance_activity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         dialog.show();
-
+        TextView lecture_text = view.findViewById(R.id.lecture_edittext);
         Button done_button =(Button)view.findViewById(R.id.done_lecture);
         TextView date_textview = view.findViewById(R.id.date_textview);
+
 
         date_textview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -391,6 +411,9 @@ public class Attendance_activity extends AppCompatActivity {
                 present.setVisibility(View.VISIBLE);
                 absent.setVisibility(View.VISIBLE);
                 late.setVisibility(View.VISIBLE);
+             //   fab.setVisibility(View.INVISIBLE);
+                Lecture = lecture_text.getText().toString().trim();
+                System.out.println(Lecture);
 
                 dialog.dismiss();
 
@@ -462,7 +485,7 @@ public class Attendance_activity extends AppCompatActivity {
     }
 
 
-    void statusA(boolean present, boolean late) {
+   public static void statusA(boolean present, boolean late) {
         a = Integer.parseInt(absentcount.getText().toString()) + 1;
 
         if (present) {
@@ -480,7 +503,7 @@ public class Attendance_activity extends AppCompatActivity {
 
     }
 
-    void statusL(boolean present, boolean abs) {
+    public static void statusL(boolean present, boolean abs) {
         l = Integer.parseInt(latecount.getText().toString()) + 1;
 
         if (abs) {
@@ -498,7 +521,7 @@ public class Attendance_activity extends AppCompatActivity {
 
     }
 
-    void statusP(boolean abs, boolean late) {
+    public static void statusP(boolean abs, boolean late) {
         p = Integer.parseInt(presentcount.getText().toString()) + 1;
 
         if (abs) {
@@ -516,7 +539,7 @@ public class Attendance_activity extends AppCompatActivity {
 
     }
 
-    void statusSingleP(boolean status) {
+    public static void statusSingleP(boolean status) {
         p = Integer.parseInt(presentcount.getText().toString()) + 1;
 
         presentcount.setText(String.valueOf(p));
@@ -530,7 +553,7 @@ public class Attendance_activity extends AppCompatActivity {
 
     }
 
-    void statusSingleA(boolean status) {
+    public static void statusSingleA(boolean status) {
         a = Integer.parseInt(absentcount.getText().toString()) + 1;
 
         absentcount.setText(String.valueOf(a));
@@ -544,7 +567,7 @@ public class Attendance_activity extends AppCompatActivity {
 
     }
 
-    void statusSingleL(boolean status) {
+    public static void statusSingleL(boolean status) {
         l = Integer.parseInt(latecount.getText().toString()) + 1;
 
         latecount.setText(String.valueOf(l));
@@ -687,6 +710,8 @@ public class Attendance_activity extends AppCompatActivity {
         String name1 = name.getText().toString();
         studentItems.add(new StudentItems(id1, name1, ""));
         studentAdapter.notifyDataSetChanged();
+
+
 
     }
 
