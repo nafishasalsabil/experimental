@@ -297,6 +297,7 @@ public class Attendance_activity extends AppCompatActivity {
 
             }
         });
+        System.out.println("asdfghjksdfghjkm");
         //  sharedPreferences1 = getSharedPreferences("selected",Context.MODE_PRIVATE);
         //    x= sharedPreferences1.getBoolean("lockedState", true);
         System.out.println(Lecture);
