@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Materials"></activity>
+        <activity android:name=".Results"></activity>
+        <activity android:name=".Materials" />
         <activity android:name=".AddNewStudents" />
         <activity android:name=".Attendance_activity"/>
         <activity android:name=".AddNewClassActivity"/>

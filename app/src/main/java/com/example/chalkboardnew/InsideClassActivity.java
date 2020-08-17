@@ -77,8 +77,8 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
 //        navController = Navigation.findNavController(this, R.id.main);
         //firebaseDatabase = FirebaseDatabase.getInstance();
         firestore = FirebaseFirestore.getInstance();
-//        userID =  firebaseAuth.getCurrentUser().getUid();
-//        DocumentReference documentReference = firestore.collection("users").document(userID);
+        userID =  firebaseAuth.getCurrentUser().getUid();
+        DocumentReference documentReference = firestore.collection("users").document(userID);
 //
 
         setSupportActionBar(toolbar_inside_class);
@@ -95,7 +95,7 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-     /*   documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task< DocumentSnapshot > task) {
                 if (task.isSuccessful()) {
@@ -105,7 +105,7 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
                     //  fields.append("\nEmail: ").append(doc.get("email"));
                     //   fields.append("\nPhone: ").append(doc.get("phone"));
                     username.setText(u);
-                  *//*  if (u.startsWith("a") || u.startsWith("A")) {
+                  /*  if (u.startsWith("a") || u.startsWith("A")) {
                         toolbar1.setNavigationIcon(R.drawable.a_un);
                         profilepic.setImageResource(R.drawable.a_un);
 
@@ -285,7 +285,7 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
                         profilepic.setImageResource(R.drawable.no9);
 
                     }
-*//*
+*/
                 }
             }
         })
@@ -294,7 +294,7 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
-*/
+
 
         actionBarDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
@@ -322,6 +322,13 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),Materials.class));
+
+            }
+        });
+        results.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Results.class));
 
             }
         });
