@@ -278,10 +278,9 @@ public class Attendance_activity extends AppCompatActivity {
         absentcount.setText(String.valueOf(a));
         latecount.setText(String.valueOf(l));
 
-   /*     userID = firebaseAuth.getCurrentUser().getUid();
+        userID = firebaseAuth.getCurrentUser().getUid();
         collectionReference = firestore.collection("users").document(userID).collection("Courses");
         collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-
 
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -298,7 +297,6 @@ public class Attendance_activity extends AppCompatActivity {
 
             }
         });
-*/
         //  sharedPreferences1 = getSharedPreferences("selected",Context.MODE_PRIVATE);
         //    x= sharedPreferences1.getBoolean("lockedState", true);
         System.out.println(Lecture);
