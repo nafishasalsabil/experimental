@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,7 +80,7 @@ public class Attendance_activity extends AppCompatActivity {
     com.getbase.floatingactionbutton.FloatingActionButton add_student;
     private AlertDialog.Builder alerDialog;
     private AlertDialog.Builder alertdialog_for_attendance;
-    String Lecture ="";
+    String Lecture_s ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -242,20 +243,6 @@ public class Attendance_activity extends AppCompatActivity {
             public void onClick(View v) {
                 if (studentAdapter.getItemCount() == 0) {
 
-                  /*  alertdialog_for_attendance = new AlertDialog.Builder(Attendance_activity.this);
-                    alertdialog_for_attendance.setTitle("Warning");
-                    alertdialog_for_attendance.setMessage("You have no students added to take attendance!");
-                    alertdialog_for_attendance.setIcon(R.drawable.alert);
-                    alertdialog_for_attendance.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-
-                    AlertDialog alertDialognewattendance = alertdialog_for_attendance.create();
-                    alertDialognewattendance.show();
-*/
                   showTakeAttendanceDialog();
                 }
                 else
@@ -278,10 +265,9 @@ public class Attendance_activity extends AppCompatActivity {
         absentcount.setText(String.valueOf(a));
         latecount.setText(String.valueOf(l));
 
-   /*     userID = firebaseAuth.getCurrentUser().getUid();
+        userID = firebaseAuth.getCurrentUser().getUid();
         collectionReference = firestore.collection("users").document(userID).collection("Courses");
         collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-
 
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -298,10 +284,10 @@ public class Attendance_activity extends AppCompatActivity {
 
             }
         });
-*/
+       // System.out.println("asdfghjksdfghjkm");
         //  sharedPreferences1 = getSharedPreferences("selected",Context.MODE_PRIVATE);
         //    x= sharedPreferences1.getBoolean("lockedState", true);
-        System.out.println(Lecture);
+    //    System.out.println(Lecture);
        /* collectionReference = firestore.collection("users").document(userID).collection("Courses").document(clicked_courseTitle).collection();
         collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -315,6 +301,11 @@ public class Attendance_activity extends AppCompatActivity {
             }
         });
 */
+        Lecture object2 = new Lecture();
+        String l_n = object2.getLecture_name();
+        String l_d = object2.getLecture_date();
+        System.out.println(l_n);
+        System.out.println(l_d);
 
 
     }
@@ -382,6 +373,7 @@ public class Attendance_activity extends AppCompatActivity {
         TextView lecture_text = view.findViewById(R.id.lecture_edittext);
         Button done_button =(Button)view.findViewById(R.id.done_lecture);
         TextView date_textview = view.findViewById(R.id.date_textview);
+        Lecture object = new Lecture();
 
 
         date_textview.setOnClickListener(new View.OnClickListener() {
@@ -395,7 +387,10 @@ public class Attendance_activity extends AppCompatActivity {
                 datePickerDialog = new DatePickerDialog(Attendance_activity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        date_textview.setText(dayOfMonth + "/" + (month +1)+ "/" + year);
+                        String date_date = dayOfMonth + "/" + (month +1)+ "/" + year;
+                        date_textview.setText(date_date);
+                        object.setLecture_date(date_date);
+
                     }
                 }, day, month, year);
                 datePickerDialog.show();
@@ -412,8 +407,10 @@ public class Attendance_activity extends AppCompatActivity {
                 absent.setVisibility(View.VISIBLE);
                 late.setVisibility(View.VISIBLE);
              //   fab.setVisibility(View.INVISIBLE);
-                Lecture = lecture_text.getText().toString().trim();
-                System.out.println(Lecture);
+                Lecture_s = lecture_text.getText().toString().trim();
+            //    System.out.println(Lecture);
+               // lecture_method(Lecture);
+                object.setLecture_name(Lecture_s);
 
                 dialog.dismiss();
 
@@ -423,6 +420,18 @@ public class Attendance_activity extends AppCompatActivity {
 
     }
 
+    /*public String getLecture() {
+        return Lecture;
+    }
+
+    public void setLecture(String lecture) {
+        Lecture = lecture;
+    }*/
+
+  /*  private String lecture_method(String lecture) {
+        return lecture;
+    }
+*/
     private void showTakeAttendanceDialog() {
         AlertDialog.Builder alerDialog = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.custom_dialog_for_taking_attendance_warning, null);
@@ -580,98 +589,7 @@ public class Attendance_activity extends AppCompatActivity {
 
     }
 
-    /*
-     *//*  void statusp(String i) {
-        if(i=="present")
-        {
-            p++;
-            a--;
-            l--;
-            //  x = true;
-            if (a < 0) {
-                a = 0;
-            }
-            if (l < 0) {
-                l = 0;
-            }
-            presentcount.setText(String.valueOf(p));
 
-        }
-
-         if(i=="absent")
-        {
-            a++;
-            p--;
-            l--;
-            if (p < 0) {
-                p = 0;
-            }
-            if (l < 0) {
-                l = 0;
-            }
-            absentcount.setText(String.valueOf(a));
-        }
-         if(i=="late")
-        {
-            l++;
-            a--;
-            p--;
-            if (a < 0) {
-                a = 0;
-            }
-            if (p < 0) {
-                p = 0;
-            }
-            latecount.setText(String.valueOf(l));
-
-        }
-
-
-     *//*   else if(i=="selected")
-            {
-                p--;
-                if(p<0)
-                {
-                    p=0;
-                }
-                presentcount.setText(String.valueOf(p));
-
-            }
-     *//*
-    }
-
-   *//* void statusa(String j) {
-        if(j=="absent")
-        {
-            a++;
-            p--;
-            l--;
-            if (p < 0) {
-                p = 0;
-            }
-            if (l < 0) {
-                l = 0;
-            }
-        }
-        absentcount.setText(String.valueOf(a));
-    }
-
-    void statusl(String k) {
-        if(k=="late")
-        {
-            l++;
-            a--;
-            p--;
-            if (a < 0) {
-                a = 0;
-            }
-            if (p < 0) {
-                p = 0;
-            }
-        }
-        latecount.setText(String.valueOf(l));
-    }
-*/
     private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.activity_add_new_students, null);
@@ -711,6 +629,9 @@ public class Attendance_activity extends AppCompatActivity {
         studentItems.add(new StudentItems(id1, name1, ""));
         studentAdapter.notifyDataSetChanged();
 
+//        System.out.println(Lecture);
+        //String lec = lecture_method();
+      //  lecture_method();
 
 
     }
