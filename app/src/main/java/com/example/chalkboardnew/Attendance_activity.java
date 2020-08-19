@@ -43,7 +43,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Attendance_activity extends AppCompatActivity {
 
@@ -58,7 +60,7 @@ public class Attendance_activity extends AppCompatActivity {
     EditText id, name;
 
     com.getbase.floatingactionbutton.FloatingActionsMenu fab;
-    com.getbase.floatingactionbutton.FloatingActionsMenu add_student_menu_fab;
+    com.getbase.floatingactionbutton.FloatingActionsMenu add_new_student_fab_menu;
 
     List<StudentItems> studentItems = new ArrayList<>();
     List<CourseInfo> classitems = new ArrayList<>();
@@ -70,7 +72,7 @@ public class Attendance_activity extends AppCompatActivity {
     String userID = firebaseAuth.getCurrentUser().getUid();
     String title = "";
     Button done;
-
+    String clicked_courseTitle ="";
     SharedPreferences sharedPreferences1, sharedPreferences2, sharedPreferences3;
     private DocumentReference documentReference;
     private CollectionReference collectionReference;
@@ -78,11 +80,12 @@ public class Attendance_activity extends AppCompatActivity {
     Button b;
     public static String detect1 = "";
     public static String detect2 = "";
-    com.getbase.floatingactionbutton.FloatingActionButton add_student_manually_fab;
+    com.getbase.floatingactionbutton.FloatingActionButton add_student_new;
     com.getbase.floatingactionbutton.FloatingActionButton add_student;
     private AlertDialog.Builder alerDialog;
     private AlertDialog.Builder alertdialog_for_attendance;
     String Lecture_s ="";
+    Lecture object = new Lecture();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +96,8 @@ public class Attendance_activity extends AppCompatActivity {
         late = findViewById(R.id.late_layout);
         b = findViewById(R.id.b);
         done = findViewById(R.id.done_button);
-        add_student_manually_fab = findViewById(R.id.add_student_manually_fab);
-        add_student_menu_fab = findViewById(R.id.add_new_student_fab_menu);
+        add_new_student_fab_menu = findViewById(R.id.add_new_student_fab_menu);
+        add_student_new = findViewById(R.id.add_student_manually_fab);
         //     layer = findViewById(R.id.lec_layer);
         t1 = findViewById(R.id.tv1);
         t2 = findViewById(R.id.tv2);
@@ -110,7 +113,7 @@ public class Attendance_activity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         Intent intent = getIntent();
-        String clicked_courseTitle = intent.getStringExtra("title");
+        clicked_courseTitle = intent.getStringExtra("title");
         System.out.println(clicked_courseTitle);
         studentAdapter = new StudentAdapter(getApplicationContext(), studentItems);
         recyclerView.setAdapter(studentAdapter);
@@ -121,7 +124,7 @@ public class Attendance_activity extends AppCompatActivity {
         absent.setVisibility(View.INVISIBLE);
         late.setVisibility(View.INVISIBLE);
         done.setVisibility(View.INVISIBLE);
-        add_student_menu_fab.setVisibility(View.INVISIBLE);
+        add_new_student_fab_menu.setVisibility(View.INVISIBLE);
 
 
         b.setOnClickListener(new View.OnClickListener() {
@@ -192,7 +195,7 @@ public class Attendance_activity extends AppCompatActivity {
                 //   recyclerView.findViewHolderForAdapterPosition().itemView.findViewById(R.id.radioButton_present);
             }
         });
-        add_student_manually_fab.setOnClickListener(new View.OnClickListener() {
+        add_student_new.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
@@ -203,7 +206,39 @@ public class Attendance_activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 showDoneDialog();
+                //   System.out.println(detect2);
+               /* alerDialog = new AlertDialog.Builder(Attendance_activity.this);
+                alerDialog.setTitle("Warning");
+                alerDialog.setMessage("You cannot add students once you start taking attendance. Do you want to add more students?");
+                alerDialog.setIcon(R.drawable.alert);
+                alerDialog.setPositiveButton("Add more", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                         *//*   present.setVisibility(View.GONE);
+                            absent.setVisibility(View.GONE);
+                            late.setVisibility(View.GONE);
 
+                            done.setVisibility(View.VISIBLE);
+                            add_student_new_fab.setVisibility(View.VISIBLE);
+                            fab.setVisibility(View.INVISIBLE);
+*//*
+                    }
+                });
+                alerDialog.setNegativeButton("Done", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        add_student_new_fab.setVisibility(View.INVISIBLE);
+                        done.setVisibility(View.INVISIBLE);
+                        fab.setVisibility(View.VISIBLE);
+                        add_student.setEnabled(false);
+                        add_student.setVisibility(View.GONE);
+
+                    }
+                });
+                AlertDialog alertDialognew = alerDialog.create();
+                alertDialognew.show();
+
+*/
             }
         });
 
@@ -272,6 +307,13 @@ public class Attendance_activity extends AppCompatActivity {
             }
         });
 */
+      /*  Lecture object2 = new Lecture();
+        String l_n = object2.getLecture_name();
+        String l_d = object2.getLecture_date();
+        System.out.println(l_n);
+        System.out.println(l_d);
+*/
+
 
     }
 
@@ -282,8 +324,9 @@ public class Attendance_activity extends AppCompatActivity {
         absent.setVisibility(View.GONE);
         late.setVisibility(View.GONE);
         done.setVisibility(View.VISIBLE);
-        add_student_menu_fab.setVisibility(View.VISIBLE);
+        add_new_student_fab_menu.setVisibility(View.VISIBLE);
         fab.setVisibility(View.INVISIBLE);
+
     }
 
     private void showNoticeDialog() {
@@ -338,8 +381,7 @@ public class Attendance_activity extends AppCompatActivity {
         TextView lecture_text = view.findViewById(R.id.lecture_edittext);
         Button done_button =(Button)view.findViewById(R.id.done_lecture);
         TextView date_textview = view.findViewById(R.id.date_textview);
-        Lecture object = new Lecture();
-
+        String date_date;
 
         date_textview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -376,6 +418,35 @@ public class Attendance_activity extends AppCompatActivity {
             //    System.out.println(Lecture);
                // lecture_method(Lecture);
                 object.setLecture_name(Lecture_s);
+                String d_d = object.getLecture_date();
+                System.out.println(object.getStudent_name());
+                documentReference = firestore.collection("users").document(userID).collection("Courses").document(clicked_courseTitle).collection("Attendance").document(Lecture_s);
+                Map<String,Object> user = new HashMap<>();
+                user.put("lecture_name",Lecture_s);
+                user.put("lecture_date",d_d);
+                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(Attendance_activity.this, "The course is added!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                String s_name = object.getStudent_name();
+                String s_id = object.getStudent_id();
+                System.out.println(object.getStudent_id());
+               /* DocumentReference documentReference2 = firestore.collection("users").document(userID).collection("Courses").document(clicked_courseTitle).collection("Attendance").document(Lecture_s).collection("Students").document(s_id);
+                Map<String,Object> inuser = new HashMap<>();
+                inuser.put("student_id",s_id);
+                inuser.put("student_name",s_name);
+
+                documentReference2.set(inuser).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(Attendance_activity.this, "The student is added!", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+*/
+
 
                 dialog.dismiss();
 
@@ -385,6 +456,18 @@ public class Attendance_activity extends AppCompatActivity {
 
     }
 
+    /*public String getLecture() {
+        return Lecture;
+    }
+
+    public void setLecture(String lecture) {
+        Lecture = lecture;
+    }*/
+
+  /*  private String lecture_method(String lecture) {
+        return lecture;
+    }
+*/
     private void showTakeAttendanceDialog() {
         AlertDialog.Builder alerDialog = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.custom_dialog_for_taking_attendance_warning, null);
@@ -425,7 +508,7 @@ public class Attendance_activity extends AppCompatActivity {
         done_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                add_student_menu_fab.setVisibility(View.INVISIBLE);
+                add_new_student_fab_menu.setVisibility(View.INVISIBLE);
                 done.setVisibility(View.INVISIBLE);
                 fab.setVisibility(View.VISIBLE);
                 add_student.setEnabled(false);
@@ -579,6 +662,9 @@ public class Attendance_activity extends AppCompatActivity {
     private void addstudent() {
         String id1 = id.getText().toString();
         String name1 = name.getText().toString();
+        object.setStudent_name(name1);
+        object.setStudent_id(id1);
+
         studentItems.add(new StudentItems(id1, name1, ""));
         studentAdapter.notifyDataSetChanged();
 
