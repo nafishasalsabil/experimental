@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InsideClassActivity"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start"
     android:id="@+id/inside_class_dlayout"
     >
 
