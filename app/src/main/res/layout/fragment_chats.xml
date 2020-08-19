@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#dadada">
+    android:background="#ffffff">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabIndicatorColor="@android:color/black"
-            android:background="#EFF3FB"
+            android:background="#ffffff"
             app:tabIndicatorHeight="2dp"
             app:tabMode="fixed"
             app:tabGravity="fill"
