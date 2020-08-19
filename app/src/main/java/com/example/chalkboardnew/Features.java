@@ -123,7 +123,7 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
         DocumentReference documentReference = firestore.collection("users").document(userID);
 //
          setSupportActionBar(toolbar_features);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#EFF3FB")));
+      //  getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#EFF3FB")));
         getSupportActionBar().setElevation(0);
         //setSupportActionBar(toolbar1);
      /*   if(getSupportActionBar()!= null)
