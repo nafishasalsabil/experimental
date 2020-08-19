@@ -32,13 +32,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             startActivity(intent);
         }
-        else
+        /*else
         {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
             startActivity(intent);
             finish();
-        }
+        }*/
 
     }
 
