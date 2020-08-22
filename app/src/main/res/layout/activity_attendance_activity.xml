@@ -273,7 +273,17 @@
                 app:fab_colorPressed="#3c1414"
                 />
         </com.getbase.floatingactionbutton.FloatingActionsMenu>
-
+<com.getbase.floatingactionbutton.FloatingActionButton
+    android:id="@+id/attendance_done_fab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:backgroundTint="#8CBEB5"
+      android:layout_marginRight="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp"
+    android:layout_gravity="bottom|right"
+    android:src="@drawable/ic_baseline_done_24"
+    />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
 
