@@ -29,7 +29,7 @@ import static java.security.AccessController.getContext;
 class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHolder> {
 
     Context context;
-    List<StudentItems> studentItems;
+    List<StudentItems> studentItems = new ArrayList<>();
     String status = "";
     private static int p , a, l;
     boolean x = false, y = false, z = false;
@@ -88,7 +88,12 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHold
 
             int pos = getAdapterPosition();
 
-            itemView.setOnClickListener(v -> onItemClickListener.onClick(getAdapterPosition()));
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onClick(studentViewHolder.this.getAdapterPosition());
+                }
+            });
 
         }
     }
@@ -105,6 +110,8 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHold
         holder.roll.setText(studentItems.get(position).getId());
         holder.name.setText(studentItems.get(position).getName());
         studentItems.get(position).setStatus(status);
+        System.out.println(studentItems.get(position).getId());
+        //studentItems.get(position).setName();
        // Attendance_activity attendance_activity = new Attendance_activity();
 
         String ui = Attendance_activity.detect1;
