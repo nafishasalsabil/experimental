@@ -11,40 +11,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Results"></activity>
+        <activity
+            android:name=".studentList"
+            android:label="@string/title_activity_student_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Results" />
         <activity android:name=".Materials" />
         <activity android:name=".AddNewStudents" />
-        <activity android:name=".Attendance_activity"/>
-        <activity android:name=".AddNewClassActivity"/>
-
-        <activity android:name=".InsideClassActivity">
-        </activity>
-        <activity android:name=".AddClassesActivity">
-        </activity>
-        <activity android:name=".Update_profile">
-
-        </activity>
-        <activity android:name=".ChoiceActivity">
-        </activity>
-        <activity android:name=".Student_Attendance">
-        </activity>
-        <activity android:name=".Attendance">
-
-        </activity>
+        <activity android:name=".Attendance_activity" />
+        <activity android:name=".AddNewClassActivity" />
+        <activity android:name=".InsideClassActivity"></activity>
+        <activity android:name=".AddClassesActivity"></activity>
+        <activity android:name=".Update_profile"></activity>
+        <activity android:name=".ChoiceActivity"></activity>
+        <activity android:name=".Student_Attendance"></activity>
+        <activity android:name=".Attendance"></activity>
         <activity
             android:name=".Features"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".ForgotPassActivity">
-
-        </activity>
-        <activity android:name=".SignupActivity">
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".ForgotPassActivity"></activity>
+        <activity android:name=".SignupActivity"></activity>
         <activity
             android:name=".Main2Activity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

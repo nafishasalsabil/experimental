@@ -8,16 +8,14 @@
     tools:context=".SignupActivity">
 
 
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="146dp"
-            android:layout_marginTop="106dp"
-            android:background="@drawable/signin" />
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="146dp"
+        android:layout_marginTop="106dp"
+        android:background="@drawable/signin" />
 
 
     <ImageView
@@ -87,7 +85,6 @@
         android:layout_height="40dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginStart="76dp"
         android:layout_marginTop="296dp"
         android:background="@drawable/roundededittext"
@@ -104,26 +101,22 @@
         android:layout_height="40dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginStart="77dp"
         android:layout_marginTop="228dp"
         android:background="@drawable/roundededittext"
         android:cursorVisible="true"
         android:fontFamily="@font/pfdintextcompproregular"
+        android:gravity="center"
         android:hint="tokyo123"
         android:inputType="text"
-        android:gravity="center"
         android:textColorHint="#A9E5D9"
         android:textCursorDrawable="@android:color/black" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="411dp"
         android:layout_height="58dp"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="-4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="253dp"
         android:backgroundTint="@android:color/white"
@@ -156,11 +149,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="398dp"
         android:layout_height="83dp"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="13dp"
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="163dp"
         android:backgroundTint="@android:color/white"
@@ -190,22 +180,21 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <Button
         android:id="@+id/signup"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="499dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="71dp"
+        android:layout_marginBottom="94dp"
         android:background="@drawable/roundedbutton"
         android:fontFamily="@font/pfdintextcompproregular"
-        android:textColor="@android:color/white"
         android:text="SIGN UP"
+        android:textColor="@android:color/white"
         android:textSize="17dp"
         android:textStyle="bold" />
-
 
     <ImageView
         android:id="@+id/imageView2"
@@ -244,15 +233,17 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_marginStart="158dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="37dp"
+        android:layout_marginBottom="39dp"
         android:clickable="true"
         android:fontFamily="@font/pfdintextcompproregular"
         android:onClick="signin"
         android:text="Already signed up? Sign in."
         android:textColor="@android:color/white" />
+
     <ProgressBar
         android:id="@+id/progressbar"
         android:layout_width="34dp"

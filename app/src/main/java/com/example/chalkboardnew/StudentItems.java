@@ -1,17 +1,19 @@
 package com.example.chalkboardnew;
 
 public class StudentItems {
-     String id;
+     int id;
      String name;
-     String status;
+  String status;
       String lecture_name;
      String lecture_date;
 
+     boolean attendance;
+     int checkedId ;
 
     public StudentItems() {
     }
 
-    public StudentItems(String id, String name, String status, String lecture_name, String lecture_date) {
+    public StudentItems(int id, String name, String status, String lecture_name, String lecture_date) {
         this.id = id;
         this.name = name;
         this.status = status;
@@ -19,11 +21,19 @@ public class StudentItems {
         this.lecture_date = lecture_date;
     }
 
-    public String getId() {
+    public int getCheckedId() {
+        return checkedId;
+    }
+
+    public void setCheckedId(int checkedId) {
+        this.checkedId = checkedId;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
