@@ -16,6 +16,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,12 +109,17 @@ public class Attendance_activity extends AppCompatActivity {
                 studentAdapter = new StudentAdapter(getApplicationContext(), studentItems);
                 listView.setAdapter(studentAdapter);
                 studentItems.addAll(documentData);
+                for(StudentItems items : studentItems)
+                {
+                    Log.d("checked",items.getName()+" " + items.id+" "+items.getStatus());
+                }
                 studentAdapter.notifyDataSetChanged();
                 t1.setVisibility(View.GONE);
                 t2.setVisibility(View.GONE);
 
             }
         });
+
 
 
         presentcount.setText(String.valueOf(p));

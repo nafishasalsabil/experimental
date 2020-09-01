@@ -113,6 +113,7 @@ class StudentAdapter extends BaseAdapter {
         return 0;
     }
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         @SuppressLint("ViewHolder")
@@ -153,7 +154,7 @@ class StudentAdapter extends BaseAdapter {
                 if (checkedItem == R.id.radioButton_present) {
                     status = PRESENT_TEXT;
 
-                    if (Objects.equals(studentItems.get(position).getStatus(), "")) {
+                    if (Objects.equals(studentItems.get(position).getStatus(), null)) {
                         Attendance_activity.statusSingleP(true);
                     } else if (Objects.equals(studentItems.get(position).getStatus(), ABS_TEXT)) {
                         Attendance_activity.statusP(true, false);
@@ -165,10 +166,12 @@ class StudentAdapter extends BaseAdapter {
                     }
                     studentItems.get(position).setStatus(status);
                     statusOfPresent.put(position,true);
+                    radioButtonPresent.setChecked(true);
+
                 } else if (checkedItem == R.id.radioButton_abs) {
                     status = ABS_TEXT;
 
-                    if (Objects.equals(studentItems.get(position).getStatus(), "")) {
+                    if (Objects.equals(studentItems.get(position).getStatus(), null)) {
                         Attendance_activity.statusSingleA(true);
                     } else if (Objects.equals(studentItems.get(position).getStatus(), PRESENT_TEXT)) {
                         Attendance_activity.statusA(true, false);
@@ -179,10 +182,11 @@ class StudentAdapter extends BaseAdapter {
                     }
                     studentItems.get(position).setStatus(status);
                     statusOfAbsent.put(position,true);
+                    radioButtonAbs.setChecked(true);
                 } else if (checkedItem == R.id.radioButton_late) {
                     status = LATE_TEXT;
 
-                    if (Objects.equals(studentItems.get(position).getStatus(), "")) {
+                    if (Objects.equals(studentItems.get(position).getStatus(), null)) {
                         Attendance_activity.statusSingleL(true);
                     } else if (Objects.equals(studentItems.get(position).getStatus(), PRESENT_TEXT)) {
                         Attendance_activity.statusL(true, false);
@@ -193,7 +197,9 @@ class StudentAdapter extends BaseAdapter {
                     }
                     studentItems.get(position).setStatus(status);
                     statusOfLate.put(position,true);
+                    radioButtonLate.setChecked(true);
                 }
+//                notifyDataSetChanged();
             }
         });
         return itemView;
