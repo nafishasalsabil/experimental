@@ -43,7 +43,6 @@
         android:layout_marginTop="281dp"
         android:background="@drawable/roundededittext"
         android:cursorVisible="true"
-        android:gravity="center"
         android:fontFamily="@font/pfdintextcompproregular"
         android:hint="          barney.stinson@gmail.com"
         android:inputType="textEmailAddress"
@@ -58,33 +57,31 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="59dp"
-        android:layout_marginBottom="197dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="323dp"
         android:backgroundTint="@android:color/white"
         android:textColorHint="@android:color/black"
         app:boxStrokeColor="@android:color/black"
         app:counterTextAppearance="@android:color/black"
         app:passwordToggleDrawable="@drawable/eye"
-        app:passwordToggleTint="@android:color/white"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@android:color/white">
 
         <EditText
 
             android:id="@+id/password"
             android:layout_width="300dp"
             android:layout_height="45dp"
-            android:gravity="center"
-
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="333dp"
             android:layout_marginBottom="73dp"
             android:background="@drawable/roundededittext"
             android:cursorVisible="true"
             android:ems="10"
             android:fontFamily="@font/pfdintextcompproregular"
+            android:gravity="center"
             android:inputType="textPassword"
-            android:drawableLeft="@drawable/ic_mail"
             android:textColorHint="@android:color/holo_orange_dark"
             android:textCursorDrawable="@android:color/darker_gray" />
 
@@ -98,13 +95,11 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="86dp"
-        android:layout_marginTop="443dp"
+        android:layout_marginTop="473dp"
         android:background="@drawable/roundedbutton"
-        android:fontFamily="@font/pfdintextcompproregular"
         android:textColor="@android:color/white"
         android:text="SIGN IN"
-        android:textSize="17dp"
-        android:textStyle="bold" />
+      />
 
 
     <ProgressBar
@@ -135,8 +130,8 @@
         android:layout_height="15dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginEnd="135dp"
+        android:layout_marginBottom="120dp"
         android:clickable="true"
         android:background="@drawable/ic_google"
          />
@@ -149,8 +144,9 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="198dp"
         android:layout_marginBottom="94dp"
-        android:fontFamily="@font/moonbold"
+        android:fontFamily="@font/exoregular"
         android:text="or"
+        android:textSize="12sp"
         android:textColor="#F7F7F3" />
 
     <TextView
@@ -159,7 +155,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="135dp"
+        android:layout_marginEnd="115dp"
         android:layout_marginBottom="68dp"
         android:fontFamily="@font/moonbold"
         android:text="Haven't signed up yet?"
@@ -173,7 +169,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="390dp"
+        android:layout_marginTop="400dp"
         android:layout_marginEnd="71dp"
         android:text="Forgot Password?"
         android:textColor="#F7F7F3"

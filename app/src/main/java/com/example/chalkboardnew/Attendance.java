@@ -28,7 +28,7 @@ public class Attendance extends AppCompatActivity {
     ArrayList<Classitem> classitems = new ArrayList<>();
     EditText classedit;
     EditText courseedit;
-
+    Boolean isScrolling = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +40,30 @@ public class Attendance extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+//        classAdapter = new ClassAdapter(this,classitems);
         recyclerView.setAdapter(classAdapter);
-        classAdapter.setOnItemClickListener(this::gotoitemactivity);
+        classAdapter.setOnItemClickListener(position -> gotoitemactivity(position));
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
+                {
+                    isScrolling =true;
+                }
+            }
 
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
     }
 
     private void gotoitemactivity(int position) {
         Intent intent = new Intent(this,Student_Attendance.class);
+       // intent.putExtra("Classname",classitems.get(position).getClassname());
+      //  intent.putExtra("Course",classitems.get(position).getCourse());
         startActivity(intent);
     }
 

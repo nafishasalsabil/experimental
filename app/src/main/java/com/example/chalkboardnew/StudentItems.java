@@ -1,14 +1,14 @@
 package com.example.chalkboardnew;
 
 public class StudentItems {
-     int id;
-     String name;
-  String status;
-      String lecture_name;
-     String lecture_date;
+    int id;
+    String name;
+    String status;
+    String lecture_name;
+    String lecture_date;
 
-     boolean attendance;
-     int checkedId ;
+    boolean attendance;
+    int checkedId ;
 
     public StudentItems() {
     }

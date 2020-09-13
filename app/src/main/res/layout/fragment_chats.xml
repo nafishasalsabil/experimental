@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff">
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/table_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@android:color/black"
             android:background="#ffffff"
-            app:tabIndicatorHeight="2dp"
-            app:tabMode="fixed"
             app:tabGravity="fill"
-            >
+            app:tabIndicatorColor="@android:color/black"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="fixed">
 
 
         </com.google.android.material.tabs.TabLayout>
 
 
     </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.viewpager.widget.ViewPager
+        android:id="@+id/my_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/my_viewpager"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,21 +1,23 @@
 package com.example.chalkboardnew;
 
 public class ForSignupDatabase {
-    String username, email, password,uid;
+    String username, email, password,id,messages,active_status,search,imageUrl;
 
     public ForSignupDatabase() {
 
     }
 
-    public ForSignupDatabase(String username, String email, String password,String uid) {
+
+    public ForSignupDatabase(String username, String email, String password, String id, String messages, String active_status, String search, String imageUrl) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.uid = uid;
-
-
+        this.id = id;
+        this.messages = messages;
+        this.active_status = active_status;
+        this.search = search;
+        this.imageUrl = imageUrl;
     }
-
 
     public String getUsername() {
         return username;
@@ -41,11 +43,51 @@ public class ForSignupDatabase {
         this.password = password;
     }
 
-    public String getUid() {
-        return uid;
+    public String getid() {
+        return id;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setid(String id) {
+        this.id = id;
+    }
+
+    public String getMessages() {
+        return messages;
+    }
+
+    public void setMessages(String messages) {
+        this.messages = messages;
+    }
+
+    public String getActive_status() {
+        return active_status;
+    }
+
+    public void setActive_status(String active_status) {
+        this.active_status = active_status;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

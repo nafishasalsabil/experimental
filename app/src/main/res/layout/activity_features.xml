@@ -45,7 +45,8 @@
                 app:itemIconTint="@color/nav"
                 app:itemTextColor="@color/nav"
                 app:labelVisibilityMode="labeled"
-                app:menu="@menu/bottom_nav_menu" />
+                app:menu="@menu/bottom_nav_menu"
+                android:background="?android:attr/windowBackground"/>
 
         </FrameLayout>
 

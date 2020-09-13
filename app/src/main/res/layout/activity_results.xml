@@ -4,91 +4,159 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9BCFC5"
+    android:background="#ffffff"
     tools:context=".Results">
-
-<TextView
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_alignParentTop="true"
-android:layout_centerHorizontal="true"
-android:layout_marginTop="98dp"
-android:fontFamily="@font/moonbold"
-android:text="Input the marks"
-android:textSize="30sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_results"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="167dp"
-        android:layout_marginEnd="88dp"
-        android:fontFamily="@font/moonbold"
-        android:text="Which kind of exam?"
-        android:textColor="@android:color/white"
-        android:textSize="20dp" />
+        android:background="#ffffff"
+        android:elevation="5dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/quiz_marks_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="6dp"
+        android:layout_below="@+id/toolbar_results">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#98AEA4">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="60dp"
+                android:src="@drawable/ic_problem"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="47dp"
+                android:background="#464646">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="130dp"
+                    android:fontFamily="@font/exoregular"
+                    android:text="Quiz Marks"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white" />
 
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+            </LinearLayout>
 
-    </RelativeLayout>
+        </LinearLayout>
 
-    <Button
 
-        android:layout_width="140dp"
-        android:layout_height="110dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="243dp"
-        android:layout_marginEnd="139dp"
 
-        android:background="@drawable/prof_button"
-        android:fontFamily="@font/exoregular"
-        android:padding="5sp"
-        android:stateListAnimator="@null"
-        android:text="Quiz"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
 
-    <Button
+    <androidx.cardview.widget.CardView
+        android:id="@+id/performance"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="6dp"
+        android:layout_below="@+id/toolbar_results">
 
-        android:layout_width="140dp"
-        android:layout_height="110dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="373dp"
-        android:layout_marginEnd="139dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#A8C4CF">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="60dp"
+                android:src="@drawable/ic_growth"/>
 
-        android:background="@drawable/prof_button"
-        android:fontFamily="@font/exoregular"
-        android:padding="5sp"
-        android:stateListAnimator="@null"
-        android:text="Lab"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="47dp"
+                android:background="#464646">
 
-    <Button
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="100dp"
+                    android:fontFamily="@font/exoregular"
+                    android:text="Class Performance"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white" />
 
-        android:layout_width="140dp"
-        android:layout_height="110dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="510dp"
-        android:layout_marginEnd="139dp"
 
-        android:background="@drawable/prof_button"
-        android:fontFamily="@font/exoregular"
-        android:padding="5sp"
-        android:stateListAnimator="@null"
-        android:text="Final"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cgpa"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="490dp"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="6dp"
+        android:layout_below="@+id/toolbar_results">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#97C3C3">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="60dp"
+                android:src="@drawable/ic_cg"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="47dp"
+                android:background="#464646">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="100dp"
+                    android:fontFamily="@font/exoregular"
+                    android:text="Calculate CGPA"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

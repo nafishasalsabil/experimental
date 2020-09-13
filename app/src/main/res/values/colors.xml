@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="present">#A2E665</color>
+    <color name="p">#93C3BA</color>
+    <color name="a">#F27979</color>
+    <color name="l">#F8C491</color>
 
     <color name="absent">#FF6961</color>
 

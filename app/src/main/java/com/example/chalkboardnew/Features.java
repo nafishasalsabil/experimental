@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -67,8 +68,9 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
     FirebaseFirestore firestore;
     String userID;
     String courseTitle="";
+    Bitmap bitmap;
 
-     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener;
+    private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener;
 
 
     //  private static final String USER = " users";
@@ -141,6 +143,7 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener1);
         load(ClassesFragment.newInstance());
         getSupportFragmentManager().beginTransaction().replace(R.id.container_main,new HomeFragment()).commit();
+
 
         //        setupBottomNavView();
         // bottomNavigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
@@ -218,6 +221,8 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
                if (u.startsWith("d") || u.startsWith("D")) {
                    toolbar_features.setNavigationIcon(R.drawable.d);
                    profilepic.setImageResource(R.drawable.d);
+                   profilepic.buildDrawingCache();
+                    bitmap = profilepic.getDrawingCache();
 
                }
                if (u.startsWith("e") || u.startsWith("E")) {
@@ -388,6 +393,14 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
                public void onFailure(@NonNull Exception e) {
                }
            });
+        profilepic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),UserProfile.class);
+                intent.putExtra("username",u);
+                startActivity(intent);
+            }
+        });
         actionBarDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

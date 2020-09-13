@@ -21,12 +21,22 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
+import static com.example.chalkboardnew.Attendance_activity.clicked_courseTitle;
+import static com.example.chalkboardnew.Attendance_activity.clicked_course_section;
 import static com.example.chalkboardnew.Attendance_activity.detect1;
 import static com.example.chalkboardnew.Attendance_activity.detect2;
+import static com.example.chalkboardnew.StudentList.Lecture_s;
 import static java.security.AccessController.getContext;
 
 class StudentAdapter extends BaseAdapter {
@@ -39,6 +49,11 @@ class StudentAdapter extends BaseAdapter {
     public static final String PRESENT_TEXT = "present";
     public static final String ABS_TEXT = "abs";
     public static final String LATE_TEXT = "late";
+    private DocumentReference documentReference;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    String userID = firebaseAuth.getCurrentUser().getUid();
 
     SparseBooleanArray statusOfPresent = new SparseBooleanArray();
 
@@ -114,34 +129,44 @@ class StudentAdapter extends BaseAdapter {
     }
 
 
+    @SuppressLint({"ViewHolder", "InflateParams", "SetTextI18n"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        @SuppressLint("ViewHolder")
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.student_item, null);
-        TextView roll = itemView.findViewById(R.id.roll);
-        TextView name = itemView.findViewById(R.id.name);
-        CardView cardView = itemView.findViewById(R.id.cardview);
-        RadioGroup radioGroupStatus = itemView.findViewById(R.id.radioGroup_status);
-        RadioButton radioButtonPresent, radioButtonAbs, radioButtonLate;
-        radioButtonPresent = itemView.findViewById(R.id.radioButton_present);
 
-        radioButtonAbs = itemView.findViewById(R.id.radioButton_abs);
-        radioButtonLate = itemView.findViewById(R.id.radioButton_late);
+        convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.student_item, null);
+        TextView roll = convertView.findViewById(R.id.roll);
+        TextView name = convertView.findViewById(R.id.name);
+        CardView cardView = convertView.findViewById(R.id.cardview);
+        RadioGroup radioGroupStatus = convertView.findViewById(R.id.radioGroup_status);
+        RadioButton radioButtonPresent, radioButtonAbs, radioButtonLate;
+        radioButtonPresent = convertView.findViewById(R.id.radioButton_present);
+
+        radioButtonAbs = convertView.findViewById(R.id.radioButton_abs);
+        radioButtonLate = convertView.findViewById(R.id.radioButton_late);
 
         roll.setText(Integer.toString(studentItems.get(position).getId()));
         name.setText(studentItems.get(position).getName());
-        if(statusOfLate.indexOfKey(position)>=0)
-        {
-            radioButtonLate.setChecked(true);
+        if (statusOfLate.indexOfKey(position) >= 0) {
+            Log.d("checked", "late radio button is setted");
+            ((RadioButton) radioGroupStatus.getChildAt(2)).setChecked(true);
+//            radioButtonLate.setChecked(true);
+//            radioButtonLate.setButtonDrawable(R.drawable.l_filled);
+
+
+        } else if (statusOfAbsent.indexOfKey(position) >= 0) {
+            Log.d("checked", "abs radio button is setted");
+            ((RadioButton) radioGroupStatus.getChildAt(1)).setChecked(true);
+
+//            radioButtonAbs.setChecked(true);
+//        radioButtonAbs.setButtonDrawable(R.drawable.a_filled);
+        } else if (statusOfPresent.indexOfKey(position) >= 0) {
+            Log.d("checked", "present radio button is setted");
+            ((RadioButton) radioGroupStatus.getChildAt(0)).setChecked(true);
+
+//            radioButtonPresent.setChecked(true);
+//            radioButtonPresent.setButtonDrawable(R.drawable.p_filled);
         }
-        else if(statusOfAbsent.indexOfKey(position)>=0)
-        {
-            radioButtonAbs.setChecked(true);
-        }
-        else if(statusOfPresent.indexOfKey(position)>=0)
-        {
-            radioButtonPresent.setChecked(true);
-        }
+
 //        holder.setIsRecyclable(false);
 
 
@@ -165,8 +190,17 @@ class StudentAdapter extends BaseAdapter {
                         statusOfLate.delete(statusOfLate.indexOfKey(position));
                     }
                     studentItems.get(position).setStatus(status);
-                    statusOfPresent.put(position,true);
+                    statusOfPresent.put(position, true);
                     radioButtonPresent.setChecked(true);
+                    documentReference = firestore.collection("users").document(userID)
+                            .collection("Courses").document(clicked_courseTitle).collection("Sections").document(clicked_course_section)
+                            .collection("Attendance").document(Lecture_s).collection(Integer.toString(studentItems.get(position).getId())).document("Status");
+                    Map<String, Object> inuser = new HashMap<>();
+                    inuser.put("id", studentItems.get(position).getId());
+                    inuser.put("name", studentItems.get(position).getName());
+                    inuser.put("status", status);
+
+                    documentReference.set(inuser);
 
                 } else if (checkedItem == R.id.radioButton_abs) {
                     status = ABS_TEXT;
@@ -181,8 +215,18 @@ class StudentAdapter extends BaseAdapter {
                         statusOfLate.delete(statusOfLate.indexOfKey(position));
                     }
                     studentItems.get(position).setStatus(status);
-                    statusOfAbsent.put(position,true);
+                    statusOfAbsent.put(position, true);
                     radioButtonAbs.setChecked(true);
+
+                    documentReference = firestore.collection("users").document(userID)
+                            .collection("Courses").document(clicked_courseTitle).collection("Sections").document(clicked_course_section)
+                            .collection("Attendance").document(Lecture_s).collection(Integer.toString(studentItems.get(position).getId())).document("Status");
+                    Map<String, Object> inuser = new HashMap<>();
+                    inuser.put("id", studentItems.get(position).getId());
+                    inuser.put("name", studentItems.get(position).getName());
+                    inuser.put("status", status);
+
+                    documentReference.set(inuser);
                 } else if (checkedItem == R.id.radioButton_late) {
                     status = LATE_TEXT;
 
@@ -196,13 +240,22 @@ class StudentAdapter extends BaseAdapter {
                         statusOfAbsent.delete(statusOfAbsent.indexOfKey(position));
                     }
                     studentItems.get(position).setStatus(status);
-                    statusOfLate.put(position,true);
+                    statusOfLate.put(position, true);
                     radioButtonLate.setChecked(true);
+                    documentReference = firestore.collection("users").document(userID)
+                            .collection("Courses").document(clicked_courseTitle).collection("Sections").document(clicked_course_section)
+                            .collection("Attendance").document(Lecture_s).collection(Integer.toString(studentItems.get(position).getId())).document("Status");
+                    Map<String, Object> inuser = new HashMap<>();
+                    inuser.put("id", studentItems.get(position).getId());
+                    inuser.put("name", studentItems.get(position).getName());
+                    inuser.put("status", status);
+
+                    documentReference.set(inuser);
                 }
 //                notifyDataSetChanged();
             }
         });
-        return itemView;
+        return convertView;
     }
 
     @Override

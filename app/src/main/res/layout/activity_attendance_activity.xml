@@ -8,6 +8,16 @@
     android:orientation="vertical"
     tools:context=".Attendance_activity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_attendance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:elevation="5dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+
+        />
+
 
     <LinearLayout
         android:id="@+id/layout1"
@@ -21,12 +31,12 @@
 
         <RelativeLayout
             android:id="@+id/present_layout"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_marginLeft="0dp"
             android:background="@drawable/present_cardview_bg"
-            android:fitsSystemWindows="true"
-            android:padding="0dp">
+            android:padding="0dp"
+            android:fitsSystemWindows="true">
 
 
             <TextView
@@ -59,11 +69,12 @@
 
         <RelativeLayout
             android:id="@+id/absent_layout"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_marginLeft="10dp"
+            android:padding="0dp"
             android:background="@drawable/absent_cardview_bg"
-            android:padding="0dp">
+            >
 
 
             <TextView
@@ -96,11 +107,13 @@
 
         <RelativeLayout
             android:id="@+id/late_layout"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_marginLeft="10dp"
+            android:padding="0dp"
             android:background="@drawable/late_cardview_bg"
-            android:padding="0dp">
+            >
+
 
 
             <TextView
@@ -138,13 +151,14 @@
         android:layout_below="@id/layout1">
 
 
+        <!--            tools:listitem="@layout/student_item"-->
+
+
         <ListView
-            android:id="@+id/students_list_view"
+            android:id="@+id/students_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/student_item" />
-
-
+            />
 
         <TextView
             android:id="@+id/tv1"
@@ -155,7 +169,7 @@
             android:fontFamily="@font/exoregular"
             android:text="Haven't added students yet?"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
@@ -167,7 +181,7 @@
             android:fontFamily="@font/exoregular"
             android:text="Students you add for taking attendance will appear here."
             android:textColor="@android:color/darker_gray"
-            android:textSize="15sp"
+            android:textSize="8sp"
             android:textStyle="normal" />
 
 
@@ -176,18 +190,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="logout"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            />
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/attendance_done_fab"
+        <Button
+            android:id="@+id/file_choser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="#8CBEB5"
-            android:src="@drawable/ic_baseline_done_24" />
+            android:visibility="gone"/>
+
+
+
+
+<com.getbase.floatingactionbutton.FloatingActionButton
+    android:id="@+id/attendance_done_fab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:backgroundTint="#8CBEB5"
+      android:layout_marginRight="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp"
+    android:layout_gravity="bottom|right"
+    android:src="@drawable/ic_baseline_done_24"
+    />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
 

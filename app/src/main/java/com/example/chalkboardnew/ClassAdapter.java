@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,16 +22,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
+class ClassAdapter extends FirestoreRecyclerAdapter<CourseInfo,ClassAdapter.ClassViewHolder> {
 
     Context context;
     List<CourseInfo> classitems;
+
+    DocumentSnapshot documentSnapshot;
+
+    /**
+     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
+     * FirestoreRecyclerOptions} for configuration options.
+     *
+     * @param options
+     */
+    public ClassAdapter(@NonNull FirestoreRecyclerOptions<CourseInfo> options) {
+        super(options);
+    }
 
     public int getPos() {
         return pos;
@@ -50,23 +66,27 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
 
     private OnItemClickListener onItemClickListener;
 
+
     public interface OnItemClickListener {
 
         void onClick(int position);
 
+    }
+    public void deleteItem(int position) {
+        getSnapshots().getSnapshot(position).getReference().delete();
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public ClassAdapter(Context context, List<CourseInfo> classitems) {
+    /*public ClassAdapter(Context context, List<CourseInfo> classitems) {
         this.classitems = classitems;
         this.context = context;
 
 
     }
-
+*/
 
     public static class ClassViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
@@ -84,26 +104,30 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
                 @Override
                 public void onClick(View v) {
 //                    onItemClickListener.onClick(ClassViewHolder.this.getAdapterPosition());
-                    Intent intent = new Intent(v.getContext(),InsideClassActivity.class);
+                    Intent intent = new Intent(v.getContext(),Sections_Inside_Courses.class);
                     intent.putExtra("Title",classname.getText());
                    // System.out.println(classname.getText());
                     v.getContext().startActivity(intent);
                 }
             });
         }
+
+
     }
 
     @NonNull
     @Override
     public ClassViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.class_item, parent, false);
+        context = parent.getContext();
+
         return new ClassViewHolder(itemView, onItemClickListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ClassViewHolder holder, int position) {
-        holder.classname.setText(classitems.get(position).getCourseTitle());
-        holder.course.setText(classitems.get(position).getCourseNo());
+    protected void onBindViewHolder(@NonNull ClassViewHolder holder, int position, @NonNull CourseInfo model)  {
+        holder.classname.setText(model.getCourseTitle());
+        holder.course.setText(model.getCourseNo());
        // System.out.println(position);
       //  System.out.println(holder.getAdapterPosition());
 
@@ -118,14 +142,12 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
                 Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.edit_class_layout);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                documentReference = firestore.collection("users").document(userID).collection("Courses").document(classitems.get(position).getCourseTitle());
-
                 EditText editcourseno = (EditText) dialog.findViewById(R.id.edit_courseno);
-               editcourseno.setText(classitems.get(position).getCourseNo());
+               editcourseno.setText(model.getCourseNo());
                 EditText editcoursetype= (EditText) dialog.findViewById(R.id.edit_coursetype);
-                editcoursetype.setText(classitems.get(position).getCourseType());
+                editcoursetype.setText(model.getCourseType());
                 EditText editcredithour = (EditText) dialog.findViewById(R.id.edit_credithours);
-                editcredithour.setText(classitems.get(position).getCredits());
+                editcredithour.setText(model.getCredits());
               //  System.out.println(classitems.get(position).getCredits());
                 Button update = (Button) dialog.findViewById(R.id.updatebutton);
                 Button cancel = (Button) dialog.findViewById(R.id.cancelbutton);
@@ -136,7 +158,9 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
                         if ((isTypeChanged() && isNumberChanged() && isCreditChanged())||( isTypeChanged()&& isNumberChanged())|| (isCreditChanged()&& isTypeChanged())||
                                 (isCreditChanged() && isNumberChanged()) || isTypeChanged() || isNumberChanged() || isCreditChanged()
                         ){
-                       //     Toast.makeText(context,"Your profile has been updated!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,"Your profile has been updated!", Toast.LENGTH_SHORT).show();
+                            documentReference = firestore.collection("users").document(userID).collection("Courses").document(model.getCourseTitle());
+
                             //!(classitems.get(position).getCourseTitle()).equals(editcoursetitle.getText()) || !(classitems.get(position).getCourseNo()).equals(editcourseno.getText())
                             dialog.dismiss();
 
@@ -217,18 +241,18 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
 
         });
 
-        int cardcolors[] = context.getResources().getIntArray(R.array.classcolors);
+       /* int cardcolors[] = context.getResources().getIntArray(R.array.classcolors);
         int randomAndroidColor = cardcolors[new Random().nextInt(cardcolors.length)];
         //  int remainder = getAdapterPosition() % cardcolors.size();
         holder.cardView.setBackgroundColor(randomAndroidColor);
-        holder.cardView.setRadius(6);
-
+        holder.cardView.setRadius(6);*/
 
     }
 
 
-    @Override
-    public int getItemCount() {
-        return classitems.size();
-    }
+
+
+
+
+
 }

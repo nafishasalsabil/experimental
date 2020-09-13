@@ -32,11 +32,25 @@ public class Student_Attendance extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-//        studentAdapter = new StudentAdapter(this,studentItems);
-//        recyclerView.setAdapter(studentAdapter);
+     /*   recyclerView.setLayoutManager(layoutManager);
+        studentAdapter = new StudentAdapter(this,studentItems);
+        recyclerView.setAdapter(studentAdapter);
+       */// studentAdapter.setOnItemClickListener(position -> changeStatus(position));
     }
 
+  /*  private void changeStatus(int position) {
+        String status = studentItems.get(position).getStatus();
+        if(status.equals("P"))
+        {
+            status = "A";
+        }
+        else
+        {
+            status = "P";
+        }
+        studentItems.get(position).setStatus(status);
+        studentAdapter.notifyItemChanged(position);
+    }*/
 
     private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -63,7 +77,8 @@ public class Student_Attendance extends AppCompatActivity {
     private void addclass() {
         String ids = id.getText().toString();
         String names = name.getText().toString();
-
+     //   studentItems.add(new StudentItems(ids,names));
+      //  studentAdapter.notifyDataSetChanged();
     }
 
 }

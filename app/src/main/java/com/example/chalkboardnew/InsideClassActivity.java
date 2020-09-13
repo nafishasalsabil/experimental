@@ -38,7 +38,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 
 
-public class InsideClassActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class InsideClassActivity extends AppCompatActivity{
     CardView attendance,materials,results,student_info;
     public DrawerLayout drawerLayout;
     public NavigationView navigationView;
@@ -82,56 +82,30 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
 //
 
         setSupportActionBar(toolbar_inside_class);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#EFF3FB")));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+        toolbar_inside_class.setNavigationIcon(R.drawable.ic_back);
         getSupportActionBar().setElevation(0);
-//
-        username = navigationView.getHeaderView(0).findViewById(R.id.username);
-        profilepic = navigationView.getHeaderView(0).findViewById(R.id.profilepic);
-
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar_inside_class, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
-//        toolbar.setNavigationIcon(R.drawable.ic_person_outline_black_24dp);
-
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        toolbar_inside_class.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete(@NonNull Task< DocumentSnapshot > task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    StringBuilder fields = new StringBuilder("");
-                    u = fields.append(doc.get("username")).toString();
-
-                    username.setText(u);
-
-                }
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                    }
-                });
-
-
-        actionBarDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
-
+            public void onClick(View v) {
+                finish();
             }
         });
-
-        actionBarDrawerToggle.setHomeAsUpIndicator(R.drawable.ic_person_outline_black_24dp);
-
+//
+        /*Intent intent = getIntent();
+        String title = intent.getStringExtra("Title");
+       */// System.out.println(title);
         Intent intent = getIntent();
+        String section = intent.getStringExtra("section");
         String title = intent.getStringExtra("Title");
 
         attendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),studentList.class);
+                Intent intent = new Intent(getApplicationContext(),StudentList.class);
+                intent.putExtra("section",section);
                 intent.putExtra("title",title);
                 startActivity(intent);
             }
@@ -139,14 +113,29 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
         materials.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Materials.class));
-
+                Intent intent = new Intent(getApplicationContext(),Materials.class);
+                intent.putExtra("section",section);
+                intent.putExtra("title",title);
+                startActivity(intent);
             }
         });
         results.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Results.class));
+                Intent intent = new Intent(getApplicationContext(),Results.class);
+                intent.putExtra("section",section);
+                intent.putExtra("title",title);
+                startActivity(intent);
+
+            }
+        });
+        student_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),StudentInfo.class);
+                intent.putExtra("section",section);
+                intent.putExtra("title",title);
+                startActivity(intent);
 
             }
         });
@@ -154,19 +143,18 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
 
     }
 
-    @Override
+  /*  @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
-
-                Intent intent = new Intent(InsideClassActivity.this, Main2Activity.class);
+Intent intent = new Intent(InsideClassActivity.this, Main2Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
+//nafisa tomar id te repo naki?hm... tomar git log in daw.. ar e ai khane nah brwserr
                 startActivity(intent);
 
-           /*     Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+           *//*     Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
                         new ResultCallback<Status>() {
                             @Override
                             public void onResult(Status status) {
@@ -177,7 +165,7 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
                                 }
                             }
                         });
-*/
+*//*
 
 
                 break;
@@ -188,6 +176,6 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
                 break;
         }
         return true;
-    }
+    }*/
 }
 

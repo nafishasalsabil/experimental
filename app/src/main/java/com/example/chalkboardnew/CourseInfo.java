@@ -3,18 +3,19 @@ package com.example.chalkboardnew;
 import java.util.ArrayList;
 
 public class CourseInfo {
-    private String courseTitle,courseNo,semester,credits,courseType,noOfQuizes;
+    private String courseTitle,courseNo,semester,credits,courseType,noOfQuizes,section;
 
     public CourseInfo() {
     }
 
-    public CourseInfo(String courseTitle, String courseNo, String semester, String credits, String courseType, String noOfQuizes) {
+    public CourseInfo(String courseTitle, String courseNo, String semester, String credits, String courseType, String noOfQuizes,String section) {
         this.courseTitle = courseTitle;
         this.courseNo = courseNo;
         this.semester = semester;
         this.credits = credits;
         this.courseType = courseType;
         this.noOfQuizes = noOfQuizes;
+        this.section = section;
     }
 
     public String getCourseTitle() {
@@ -63,6 +64,14 @@ public class CourseInfo {
 
     public void setNoOfQuizes(String noOfQuizes) {
         this.noOfQuizes = noOfQuizes;
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
     }
 
     @Override

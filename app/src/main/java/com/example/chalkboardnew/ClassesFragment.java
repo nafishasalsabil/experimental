@@ -1,6 +1,7 @@
 package com.example.chalkboardnew;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,13 +20,16 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -38,6 +42,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -46,11 +51,14 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class ClassesFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
     public DrawerLayout drawerLayout;
@@ -69,10 +77,6 @@ public class ClassesFragment extends Fragment implements NavigationView.OnNaviga
     public String u = "";
 
 
-
-
-
-
     TextView t1, t2;
     private RecyclerView recyclerView;
     private ClassAdapter classAdapter;
@@ -85,7 +89,7 @@ public class ClassesFragment extends Fragment implements NavigationView.OnNaviga
     //    String name = getArguments().getString("data");
     EditText ct, cn;
     String title = "";
-   // Toolbar classes_toolbar;
+    // Toolbar classes_toolbar;
 
 
     private DocumentReference documentReference;
@@ -118,34 +122,44 @@ public class ClassesFragment extends Fragment implements NavigationView.OnNaviga
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-       // classes_toolbar = view.findViewById(R.id.classes_toolbar);
-       // ((AppCompatActivity)getActivity()).setSupportActionBar(classes_toolbar);
+        // classes_toolbar = view.findViewById(R.id.classes_toolbar);
+        // ((AppCompatActivity)getActivity()).setSupportActionBar(classes_toolbar);
 
 
         collectionReference = firestore.collection("users").document(userID).collection("Courses");
-
-        collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+      //  List<CourseInfo> documentData = queryDocumentSnapshots.toObjects(CourseInfo.class);
+        Query query = collectionReference;
+        FirestoreRecyclerOptions<CourseInfo> options = new FirestoreRecyclerOptions.Builder<CourseInfo>()
+                .setQuery(query, CourseInfo.class)
+                .build();
+        classAdapter = new ClassAdapter(options);
+        recyclerView.setAdapter(classAdapter);
+       // classitems.addAll(options);
+        classAdapter.notifyDataSetChanged();
+        t1.setVisibility(View.GONE);
+        t2.setVisibility(View.GONE);
+      /*  collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<CourseInfo> documentData = queryDocumentSnapshots.toObjects(CourseInfo.class);
-                classAdapter = new ClassAdapter(getContext(), classitems);
+                classAdapter = new ClassAdapter(classitems);
                 recyclerView.setAdapter(classAdapter);
                 classitems.addAll(documentData);
                 classAdapter.notifyDataSetChanged();
                 t1.setVisibility(View.GONE);
                 t2.setVisibility(View.GONE);
                 //    System.out.println();
-               /* classAdapter.setOnItemClickListener(new ClassAdapter.OnItemClickListener() {
+               *//* classAdapter.setOnItemClickListener(new ClassAdapter.OnItemClickListener() {
                     @Override
                     public void onClick(int position) {
                         gotoinsideclass(position);
                     }
-                });*/
+                });*//*
 
 
             }
         });
-
+*/
         FloatingActionButton floatingActionButton = (FloatingActionButton) view.findViewById(R.id.addclass);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,7 +169,8 @@ public class ClassesFragment extends Fragment implements NavigationView.OnNaviga
         });
      /*   drawerLayout = view.findViewById(R.id.classes_dlayout);
         navigationView = view.findViewById(R.id.navigationView);
-     */   DocumentReference id_documentReference = firestore.collection("users").document(userID);
+     */
+        DocumentReference id_documentReference = firestore.collection("users").document(userID);
        /* username = navigationView.getHeaderView(0).findViewById(R.id.username);
         profilepic = navigationView.getHeaderView(0).findViewById(R.id.profilepic);
        *//* actionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, classes_toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -167,18 +182,81 @@ public class ClassesFragment extends Fragment implements NavigationView.OnNaviga
         navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) getActivity());
        */
 
-
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
 
         return view;
     }
 
-    public void test()
-    {
+    @Override
+    public void onStart() {
+        super.onStart();
+        classAdapter.startListening();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        classAdapter.stopListening();
+    }
+
+    List<String> archive = new ArrayList<>();
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+         //   classAdapter.deleteItem(viewHolder.getAdapterPosition());
+            if(direction==ItemTouchHelper.LEFT)
+            {
+                Toast.makeText(getContext(), "Deleting", Toast.LENGTH_LONG).show();
+                classAdapter.deleteItem(viewHolder.getAdapterPosition());
+
+            }
+
+           /* int position = viewHolder.getAdapterPosition();
+            switch(direction)
+            {
+                case ItemTouchHelper.LEFT:
+                    String course_name = classitems.get(position).getCourseTitle();
+                    archive.add(course_name);
+                    classitems.remove(position);
+                    classAdapter.notifyItemRemoved(position);
+                    Snackbar.make(recyclerView,course_name+" Archived", Snackbar.LENGTH_LONG)
+                           *//* .setAction("Undo", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    archive.remove(archive.lastIndexOf(course_name));
+                                    classitems.;
+                                }
+                            }).show()*//*;
+
+
+            }
+*/
+
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    .addBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary))
+                    .addActionIcon(R.drawable.ic_baseline_delete_24)
+                    .create()
+                    .decorate();
+
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
+    };
+
+    public void test() {
 
     }
 
     private void gotoinsideclass(int position) {
-        startActivity(new Intent(getActivity(), InsideClassActivity.class));
+        startActivity(new Intent(getActivity(), Sections_Inside_Courses.class));
 
     }
 
@@ -229,5 +307,8 @@ public class ClassesFragment extends Fragment implements NavigationView.OnNaviga
                 startActivity(new Intent(getActivity(), Update_profile.class));
                 break;
         }
-        return true;    }
+        return true;
+    }
+
+
 }
